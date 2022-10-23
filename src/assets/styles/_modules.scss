@@ -1,0 +1,51 @@
+@import "modules/color";
+@import "modules/font";
+@import "modules/size";
+@import "modules/space";
+@import "modules/shadow";
+
+.marginOff {
+  margin: 0 !important;
+}
+
+.paddingOff {
+  padding: 0 !important;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.fullHeight {
+  height: 100%;
+}
+
+.listable {
+  li {
+    list-style-type: circle;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.rightBorder {
+  border-right: 1px solid $line-color;
+}
+
+.userSelectNone {
+  user-select: none;
+}
+
+.pointer {
+  cursor: pointer;
+}

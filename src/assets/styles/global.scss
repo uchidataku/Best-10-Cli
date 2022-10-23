@@ -1,0 +1,99 @@
+@import "modules";
+@import "reset";
+
+html {
+  color: $black;
+  font-feature-settings: "kern";
+  font-kerning: normal;
+  font-size: 62.5%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  word-wrap: break-word;
+}
+
+body {
+  font-family: -apple-system, "Noto Sans JP", BlinkMacSystemFont, Helvetica Neue,
+  Hiragino Kaku Gothic ProN, Hiragino Sans, ヒラギノ角ゴ ProN W3, Arial, メイリオ, Meiryo,
+  sans-serif !important;
+  font-size: 14px;
+  letter-spacing: 0.05rem;
+  background-color: transparent;
+}
+
+* {
+  appearance: none;
+}
+
+iframe,
+svg {
+  vertical-align: middle;
+}
+
+img {
+  backface-visibility: hidden;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast; // 実際これでは治ってない画像あり(サイドバーのアバター)
+  vertical-align: top;
+}
+
+ul {
+  list-style: none;
+  margin-block-end: 0;
+  margin-block-start: 0;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+}
+
+input {
+  &:focus {
+    outline: none;
+  }
+}
+
+/*noinspection CssInvalidPseudoSelector*/
+input::placeholder {
+  color: #bfbfbf;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px #fff inset;
+}
+
+// Text
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+}
+
+button {
+  &:focus {
+    outline: 0;
+  }
+}
+
+hr {
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 1px solid $line-color;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+}
+
+textarea {
+  &:focus-visible {
+    outline: -webkit-focus-ring-color auto 0;
+  }
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
