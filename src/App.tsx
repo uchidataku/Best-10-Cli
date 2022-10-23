@@ -1,24 +1,18 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Rankings from "./components/Rankings";
+import Card from "./components/Card";
+
+const id = 'hoge'
+const title = "好きな動物 Best-10"
+const genre = '娯楽'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/*<Rankings />*/}
+
+      <Card id={id} title={title} genre={genre}/>
     </div>
   );
 }

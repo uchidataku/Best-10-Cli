@@ -1,4 +1,4 @@
-export const request = {
+const Api = {
   signIn: {
     path: "/sign_in",
     buildPath: () => "/sign_in",
@@ -28,3 +28,5 @@ export const request = {
     buildPath: (itemId: string) => "/items/" + itemId + "/likes",
   },
 };
+
+export default Api;
