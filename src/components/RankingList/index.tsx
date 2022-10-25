@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "../axios";
-import Api from "../qpi";
-import Card from "./Card";
+import axios from "../../axios";
+import Api from "../../qpi";
+import RankingCard from "../RankingCard";
+import styles from "./style.module.scss"
 
 type Ranking = {
   id: string;
@@ -9,7 +10,7 @@ type Ranking = {
   genre: string;
 };
 
-const Rankings = () => {
+const RankingList = () => {
   const [rankings, setRankings] = useState<Ranking[]>([]);
 
   useEffect(() => {
@@ -24,12 +25,12 @@ const Rankings = () => {
   console.log(rankings);
 
   return (
-    <div>
-      {/*{rankings.map((ranking) => {*/}
-      {/*  <Card id={ranking.id} title={ranking.title} genre={ranking.genre} />;*/}
-      {/*})}*/}
+    <div className={styles.RankingList}>
+      {rankings.map((ranking) => (
+        <RankingCard key={ranking.id} {...ranking} />
+        ))}
     </div>
   );
 };
 
-export default Rankings;
+export default RankingList;

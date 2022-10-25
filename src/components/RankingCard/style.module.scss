@@ -1,0 +1,40 @@
+@import "src/assets/styles/modules";
+
+.RankingCard {
+  background-color: $content-bg-color;
+  border-color: $primary-color;
+  border-style: solid;
+  border-radius: $radius-md;
+  padding: $space-xs;
+  margin-bottom: $space-sm;
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-size: $f-size-md;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+
+    p {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .sub {
+    text-align: right;
+  }
+
+  .counts {
+    padding-bottom: $space-xs;
+    color: $support-color;
+  }
+
+  .genre {
+    color: $support-color;
+  }
+}
