@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../axios";
-import Api from "../../qpi";
+import axios from "../../../config/axios";
+import Api from "../../../config/qpi";
 import RankingCard from "../RankingCard";
 import styles from "./style.module.scss"
 
