@@ -30,13 +30,15 @@ const RankingDetail = ({rankingId}: Props) => {
 
   return (
     <div className={styles.rankingDetail}>
-      <div className={styles.rankingTitle}>
-        <p>{ranking?.title}</p>
-      </div>
       <div className={styles.rankingInfo}>
-        <p>created by {creator?.username}</p>
-        {/*<p>{genreLabelFor(ranking?.genre)}</p>*/}
-        <p>{ranking?.genre}</p>
+        <div className={styles.rankingTitle}>
+          <p>{ranking?.title}</p>
+        </div>
+        <div className={styles.rankingSubInfo}>
+          <p>created by {creator?.username}</p>
+          {/*<p>{genreLabelFor(ranking?.genre)}</p>*/}
+          <p>{ranking?.genre}</p>
+        </div>
       </div>
       <div className={styles.rankingDetailItems}>
         {items.map((item, idx) => (

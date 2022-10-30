@@ -1,7 +1,10 @@
 @import "../../../assets/styles/modules";
 
 .rankingDetail {
-  padding: $space-xs;
+  .rankingInfo {
+    margin-bottom: $space-sm;
+    padding: 0 $space-sm;
+  }
 
   .rankingTitle {
     font-size: $f-size-lg;
@@ -9,10 +12,10 @@
     margin-bottom: $space-xs;
   }
 
-  .rankingInfo {
+  .rankingSubInfo {
     display: flex;
     justify-content: space-between;
-    margin-bottom: $space-sm;
+    color: $support-color;
   }
 
   .rankingDetailItems {
