@@ -2,18 +2,18 @@ import React from "react";
 import styles from "./style.module.scss"
 import { HeartOutlined } from '@ant-design/icons';
 import classnames from "classnames";
+import Item from "../../model/Item";
 
-type Item = {
+type Props = {
   rank: number;
-  title: string;
-  like_counts: number;
+  item: Item;
 }
 
-const RankingDetailItem = (item: Item) => {
+const RankingDetailItem = ({rank, item}: Props) => {
   console.log(item);
 
   function getDetailItemClassName() {
-    if (item.rank < 11) {
+    if (rank < 11) {
       return styles.rankingDetailItem;
     } else {
       return [styles.rankingDetailItem, styles.loadMoreDetailItem];
@@ -21,7 +21,7 @@ const RankingDetailItem = (item: Item) => {
   }
 
   function getTitleClassName() {
-    switch (item.rank) {
+    switch (rank) {
       case 1:
         return styles.first;
       case 2:
@@ -36,10 +36,10 @@ const RankingDetailItem = (item: Item) => {
   return (
     <div className={classnames(getDetailItemClassName())}>
       <div className={classnames(getTitleClassName())}>
-        <p>{item.rank < 11 ? item.rank : '-'} {item.title}</p>
+        <p>{rank < 11 ? rank : '-'} {item.name}</p>
       </div>
       <div className={styles.like}>
-        <p className={styles.likeCount}>{item.like_counts} likes</p>
+        <p className={styles.likeCount}>{item.likes_count} likes</p>
         <HeartOutlined />
       </div>
     </div>

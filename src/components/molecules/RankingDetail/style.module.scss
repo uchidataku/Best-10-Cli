@@ -6,6 +6,12 @@
   .rankingTitle {
     font-size: $f-size-lg;
     font-weight: bold;
+    margin-bottom: $space-xs;
+  }
+
+  .rankingInfo {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: $space-sm;
   }
 
