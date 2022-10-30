@@ -1,0 +1,14 @@
+@import "../../../assets/styles/modules";
+
+.rankingDetail {
+  padding: $space-xs;
+
+  .rankingTitle {
+    font-size: $f-size-lg;
+    font-weight: bold;
+    margin-bottom: $space-sm;
+  }
+
+  .rankingDetailItems {
+  }
+}

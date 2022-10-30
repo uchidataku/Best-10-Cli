@@ -1,0 +1,50 @@
+@import "../../../assets/styles/modules";
+
+.rankingDetailItem {
+  padding: $space-xs $space-sm;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $space-xs;
+
+  // 1~3位
+  .first {
+    color: $gold;
+    font-size: $f-size-md;
+    font-weight: bold;
+  }
+
+  .second {
+    color: $silver;
+    font-size: $f-size-md;
+    font-weight: bold;
+  }
+
+  .third {
+    color: $bronze;
+    font-size: $f-size-md;
+    font-weight: bold;
+  }
+
+  // 4~10位/11位以下
+  .title {
+    color: $black;
+    font-size: $f-size-md;
+  }
+
+
+  .like {
+    display: flex;
+  }
+
+  .likeCount {
+    font-size: $f-size-xs;
+    font-weight: bold;
+    margin-right: $space-xs;
+  }
+}
+
+// 11位以下
+.loadMoreDetailItem {
+  margin-bottom: 0;
+  padding: 0 $space-sm;
+}
