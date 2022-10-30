@@ -13,8 +13,6 @@ type Props = {
 }
 
 const RankingDetailItem = ({rank, item}: Props) => {
-  console.log(item);
-
   const [account, setAccount] = useState<Account>();
 
   function getDetailItemClassName() {

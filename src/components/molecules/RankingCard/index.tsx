@@ -5,8 +5,6 @@ import Ranking from "../../model/Ranking";
 import { genreLabelFor } from "../../model/Ranking/helpers";
 
 const RankingCard = (ranking: Ranking) => {
-  console.log(ranking);
-
   return (
     <div className={styles.RankingCard}>
       <div className={styles.item}>

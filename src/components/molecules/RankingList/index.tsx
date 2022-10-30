@@ -17,8 +17,6 @@ const RankingList = () => {
     fetchData();
   }, []);
 
-  console.log(rankings);
-
   return (
     <div className={styles.RankingList}>
       {rankings.map((ranking) => (
