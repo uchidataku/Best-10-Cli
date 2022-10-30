@@ -1,10 +1,10 @@
 import React from "react";
-import Rankings from "../../../molecules/RankingList";
+import RankingList from "../../../molecules/RankingList";
 
 const Top = () => {
     return (
       <div className="App">
-        <Rankings />
+        <RankingList />
       </div>
     );
 };

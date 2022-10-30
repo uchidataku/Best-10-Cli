@@ -1,7 +1,8 @@
 interface Item {
   id: string;
   name: string;
-  likes_count: number;
+  likesCount: number;
+  isLiked: boolean;
 }
 
 export default Item;

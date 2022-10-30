@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.scss"
-import { HeartOutlined } from '@ant-design/icons';
+import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';
 import classnames from "classnames";
 import Item from "../../model/Item";
+import axios from "axios";
+import Api from "../../../config/qpi";
+import Account from "../../model/Account";
 
 type Props = {
   rank: number;
@@ -11,6 +14,8 @@ type Props = {
 
 const RankingDetailItem = ({rank, item}: Props) => {
   console.log(item);
+
+  const [account, setAccount] = useState<Account>();
 
   function getDetailItemClassName() {
     if (rank < 11) {
@@ -33,14 +38,26 @@ const RankingDetailItem = ({rank, item}: Props) => {
     }
   }
 
+  async function onClickCreateLike(itemId: string) {
+    if (!account) return;
+
+    // TODO: currentAccount渡す
+    await axios.post(Api.createLike.buildPath(itemId))
+  }
+
   return (
     <div className={classnames(getDetailItemClassName())}>
       <div className={classnames(getTitleClassName())}>
         <p>{rank < 11 ? rank : '-'} {item.name}</p>
       </div>
       <div className={styles.like}>
-        <p className={styles.likeCount}>{item.likes_count} likes</p>
-        <HeartOutlined />
+        <p className={styles.likeCount}>{item.likesCount} likes</p>
+        { item.isLiked === true ? (
+          <HeartTwoTone twoToneColor="#d73a49" />
+        ) : (
+          <HeartOutlined onClick={() => onClickCreateLike(item.id)}/>
+          )
+        }
       </div>
     </div>
   );
