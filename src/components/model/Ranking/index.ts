@@ -1,7 +1,9 @@
+import { Genre } from "./helpers";
+
 interface Ranking {
   id: string;
   title: string;
-  genre: string;
+  genre: Genre;
 }
 
 export default Ranking;

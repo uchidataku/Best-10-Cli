@@ -1,12 +1,8 @@
 import React from "react";
 import { Tag } from "antd";
 import styles from "./style.module.scss"
-
-type Ranking = {
-  id: string;
-  title: string;
-  genre: string;
-};
+import Ranking from "../../model/Ranking";
+import { genreLabelFor } from "../../model/Ranking/helpers";
 
 const RankingCard = (ranking: Ranking) => {
   console.log(ranking);

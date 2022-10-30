@@ -6,6 +6,7 @@ import RankingDetailItem from "../RankingDetailItem";
 import Account from "../../model/Account";
 import Item from "../../model/Item";
 import Ranking from "../../model/Ranking";
+import { genreLabelFor } from "../../model/Ranking/helpers";
 
 type Props = {
   rankingId: string
@@ -34,6 +35,7 @@ const RankingDetail = ({rankingId}: Props) => {
       </div>
       <div className={styles.rankingInfo}>
         <p>created by {creator?.username}</p>
+        {/*<p>{genreLabelFor(ranking?.genre)}</p>*/}
         <p>{ranking?.genre}</p>
       </div>
       <div className={styles.rankingDetailItems}>
