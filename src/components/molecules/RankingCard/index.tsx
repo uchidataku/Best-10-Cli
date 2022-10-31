@@ -13,7 +13,7 @@ const RankingCard = (ranking: Ranking) => {
         </div>
         <div className={styles.sub}>
           <p className={styles.counts}>143 項目</p>
-          <Tag className={styles.genre}>{ranking.genre}</Tag>
+          <Tag className={styles.genre}>{genreLabelFor(ranking?.genre)}</Tag>
         </div>
       </div>
     </div>
