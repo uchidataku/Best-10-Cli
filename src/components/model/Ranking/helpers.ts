@@ -1,25 +1,25 @@
 export const GENRE = {
-  'unspecified': 'unspecified',
-  'entertainment': 'entertainment',
-  'music': 'music',
-  'nature': 'nature',
-  'society': 'society',
-  'political_economy': 'political_economy',
-  'animal': 'animal',
-  'fashion': 'fashion',
-  'lifestyle': 'lifestyle',
-  'sport': 'sport',
-  'vehicle': 'vehicle',
-  'beauty_health': 'beauty_health',
-  'family': 'family',
-  'cooking': 'cooking',
-  'gourmet': 'gourmet',
-  'business': 'business',
-  'it': 'it',
-  'travel': 'travel',
-  'education': 'education'
-} as const
-export type Genre = typeof GENRE[keyof typeof GENRE]
+  unspecified: "unspecified",
+  entertainment: "entertainment",
+  music: "music",
+  nature: "nature",
+  society: "society",
+  political_economy: "political_economy",
+  animal: "animal",
+  fashion: "fashion",
+  lifestyle: "lifestyle",
+  sport: "sport",
+  vehicle: "vehicle",
+  beauty_health: "beauty_health",
+  family: "family",
+  cooking: "cooking",
+  gourmet: "gourmet",
+  business: "business",
+  it: "it",
+  travel: "travel",
+  education: "education",
+} as const;
+export type Genre = typeof GENRE[keyof typeof GENRE];
 
 export function genreLabelFor(genre?: Genre) {
   switch (genre) {

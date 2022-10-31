@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
 import RankingCard from "../RankingCard";
-import styles from "./style.module.scss"
+import styles from "./style.module.scss";
 import Ranking from "../../model/Ranking";
 
 const RankingList = () => {
@@ -21,7 +21,7 @@ const RankingList = () => {
     <div className={styles.RankingList}>
       {rankings.map((ranking) => (
         <RankingCard key={ranking.id} {...ranking} />
-        ))}
+      ))}
     </div>
   );
 };
