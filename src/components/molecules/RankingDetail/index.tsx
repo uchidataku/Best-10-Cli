@@ -36,7 +36,7 @@ const RankingDetail = ({ rankingId }: Props) => {
         </div>
         <div className={styles.rankingSubInfo}>
           <p>created by {creator?.username}</p>
-          <p>{genreLabelFor(ranking?.genre)}</p>
+          {/*<p>{genreLabelFor(ranking?.genre)}</p>*/}
         </div>
       </div>
       <div className={styles.rankingDetailItems}>

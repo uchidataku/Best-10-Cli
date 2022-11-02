@@ -1,5 +1,9 @@
 @import "../../../assets/styles/modules";
 
+p {
+  margin: 0;
+}
+
 .RankingCard {
   background-color: $content-bg-color;
   border-color: $primary-color;
@@ -22,6 +26,7 @@
     p {
       display: inline-block;
       vertical-align: middle;
+      color: $black;
     }
   }
 
@@ -36,5 +41,6 @@
 
   .genre {
     color: $support-color;
+    margin: 0;
   }
 }
