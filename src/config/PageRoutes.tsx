@@ -7,15 +7,17 @@ import SignInPage from "../components/pages/SignInPage";
 import NotFoundPage from "../components/pages/NotFoundPage";
 import RankingPage from "../components/pages/RankingPage";
 
-const id = "hoge";
+type Props = {
+  id?: string;
+};
 
-const PageRoutes = () => {
+const PageRoutes = ({ id }: Props) => {
   return (
     <Routes>
       <Route path={routes.top()} element={<TopPage />} />
       <Route path={routes.signUp()} element={<SignUpPage />} />
       <Route path={routes.signIn()} element={<SignInPage />} />
-      <Route path={routes.ranking(id)} element={<RankingPage />} />
+      <Route path={routes.ranking()} element={<RankingPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

@@ -2,7 +2,7 @@ const routes = {
   top: (): string => "/",
   signIn: (): string => "/sign_in",
   signUp: (): string => "/sign_up",
-  ranking: (id: string): string => "/rankings/" + id,
+  ranking: (): string => "/rankings/:id",
   rankings: (): string => "/rankings",
 };
 

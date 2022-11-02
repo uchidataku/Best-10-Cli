@@ -1,10 +1,13 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import RankingDetail from "../../../molecules/RankingDetail";
 
 const Ranking = () => {
+  const location = useLocation();
+
   return (
     <div>
-      <RankingDetail rankingId={"26dbe90c-b3b3-4140-a9e7-82e256ddd2eb"} />
+      <RankingDetail rankingId={location.pathname.split("/")[2]} />
     </div>
   );
 };
