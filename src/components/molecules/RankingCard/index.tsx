@@ -1,8 +1,8 @@
 import React from "react";
 import { Tag } from "antd";
 import styles from "./style.module.scss";
-import Ranking from "../../model/Ranking";
-import { genreLabelFor } from "../../model/Ranking/helpers";
+import Ranking from "../../../models/Ranking";
+import { genreLabelFor } from "../../../models/Ranking/helpers";
 
 const RankingCard = (ranking: Ranking) => {
   return (

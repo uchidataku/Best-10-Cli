@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
 import classnames from "classnames";
-import Item from "../../model/Item";
 import axios from "axios";
 import Api from "../../../config/qpi";
-import Account from "../../model/Account";
+import Account from "../../../models/Account";
+import Item from "../../../models/Item";
 
 type Props = {
   rank: number;

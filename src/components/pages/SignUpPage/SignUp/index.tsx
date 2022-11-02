@@ -16,13 +16,15 @@ const SignUp = () => {
         <p>新規登録</p>
       </div>
       <div>
-        <div>
+        <div className={styles.username}>
           <p>ユーザーネーム</p>
-          <Input placeholder="Username" />
+          {/*<input className={styles.usernameInput} type="text" placeholder="Username" />*/}
+          <Input size="small" placeholder="Username" />
         </div>
-        <div>
+        <div className={styles.password}>
           <p>パスワード</p>
-          <Input.Password placeholder="Password" />
+          {/*<input className={styles.passwordInput} type="password" placeholder="Password" />*/}
+          <Input.Password size="small" placeholder="Password" />
         </div>
 
         <Button type="primary" onClick={() => onClickSignUp()}>

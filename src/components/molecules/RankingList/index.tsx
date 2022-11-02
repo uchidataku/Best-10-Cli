@@ -3,7 +3,7 @@ import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
 import RankingCard from "../RankingCard";
 import styles from "./style.module.scss";
-import Ranking from "../../model/Ranking";
+import Ranking from "../../../models/Ranking";
 
 const RankingList = () => {
   const [rankings, setRankings] = useState<Ranking[]>([]);

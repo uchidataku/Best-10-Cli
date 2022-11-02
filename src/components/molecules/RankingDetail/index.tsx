@@ -3,10 +3,10 @@ import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
 import styles from "./style.module.scss";
 import RankingDetailItem from "../RankingDetailItem";
-import Account from "../../model/Account";
-import Item from "../../model/Item";
-import Ranking from "../../model/Ranking";
-import { genreLabelFor } from "../../model/Ranking/helpers";
+import Account from "../../../models/Account";
+import Item from "../../../models/Item";
+import Ranking from "../../../models/Ranking";
+import { genreLabelFor } from "../../../models/Ranking/helpers";
 
 type Props = {
   rankingId: string;

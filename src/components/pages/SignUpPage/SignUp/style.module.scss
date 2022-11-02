@@ -5,4 +5,22 @@
     font-size: $f-size-lg;
     font-weight: bold;
   }
+
+  .username {
+    display: flex;
+    margin-bottom: $space-md;
+
+    p {
+      margin-right: $space-xs;
+    }
+
+    .usernameInput {
+      color: $black;
+    }
+  }
+
+  .password {
+    display: flex;
+    margin-bottom: $space-md;
+  }
 }
