@@ -4,10 +4,11 @@ import RankingDetail from "../../../molecules/RankingDetail";
 
 const Ranking = () => {
   const location = useLocation();
+  const rankingId = location.pathname.split("/")[2];
 
   return (
     <div>
-      <RankingDetail rankingId={location.pathname.split("/")[2]} />
+      <RankingDetail rankingId={rankingId} />
     </div>
   );
 };

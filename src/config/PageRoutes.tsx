@@ -7,11 +7,7 @@ import SignInPage from "../components/pages/SignInPage";
 import NotFoundPage from "../components/pages/NotFoundPage";
 import RankingPage from "../components/pages/RankingPage";
 
-type Props = {
-  id?: string;
-};
-
-const PageRoutes = ({ id }: Props) => {
+const PageRoutes = () => {
   return (
     <Routes>
       <Route path={routes.top()} element={<TopPage />} />
