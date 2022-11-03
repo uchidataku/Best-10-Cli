@@ -7,14 +7,13 @@ const client = axios.create({
 });
 
 if (token) {
-  client.interceptors.request.use(
-    async (request) => {
+  client.interceptors.request.use(async (request) => {
     request.headers = {
       ...request.headers,
       authorization: `Bearer ${token}`,
     };
     return request;
-  })
+  });
 }
 
 client.interceptors.response.use((response: AxiosResponse) => {

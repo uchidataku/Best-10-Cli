@@ -26,9 +26,9 @@ const SignIn = () => {
         localStorage.setItem("AUTH_TOKEN", res.data.token);
         navigate(routes.top());
         Toast.show({
-          icon: 'success',
-          content: 'ログインしました',
-        })
+          icon: "success",
+          content: "ログインしました",
+        });
       })
       .catch((error) => {
         console.log(error);
