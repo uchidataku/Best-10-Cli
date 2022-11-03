@@ -15,7 +15,7 @@ const RankingList = () => {
   }
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
   return (
