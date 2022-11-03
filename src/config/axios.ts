@@ -4,8 +4,18 @@ import { camelizeKeys, decamelizeKeys } from "humps";
 const token = localStorage.getItem("AUTH_TOKEN");
 const client = axios.create({
   baseURL: "http://localhost:3000",
-  headers: { Authorization: `Bearer ${token}` },
 });
+
+if (token) {
+  client.interceptors.request.use(
+    async (request) => {
+    request.headers = {
+      ...request.headers,
+      authorization: `Bearer ${token}`,
+    };
+    return request;
+  })
+}
 
 client.interceptors.response.use((response: AxiosResponse) => {
   if (response.data) {

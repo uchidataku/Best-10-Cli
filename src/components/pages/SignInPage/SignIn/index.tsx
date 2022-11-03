@@ -4,11 +4,14 @@ import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
 import { Form, Input, Button } from "antd-mobile";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
+import { useNavigate } from "react-router-dom";
+import routes from "../../../../constants/routes";
 
 const SignIn = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   async function onClickSignIn() {
     const request = await axios
@@ -21,6 +24,7 @@ const SignIn = () => {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("AUTH_TOKEN", res.data.token);
+        navigate(routes.top());
       })
       .catch((error) => {
         console.log(error);

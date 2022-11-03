@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
-// import { Input, Button } from "antd";
 import { Form, Input, Button } from "antd-mobile";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import styles from "./style.module.scss";
+import routes from "../../../../constants/routes";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   async function onClickSignUp() {
     const request = await axios
@@ -22,17 +24,13 @@ const SignUp = () => {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("AUTH_TOKEN", res.data.token);
+        navigate(routes.top());
       })
       .catch((error) => {
         console.log(error);
       });
     return request;
   }
-
-  console.log("===username===");
-  console.log(username);
-  console.log("===password===");
-  console.log(password);
 
   return (
     <div className={styles.signUp}>
@@ -48,7 +46,6 @@ const SignUp = () => {
           </Button>
         }
       >
-        {/*<Form.Header>新規登録</Form.Header>*/}
         <Form.Item name="username" label="ユーザーネーム" rules={[{ required: true, message: "ユーザーネームを入力してください" }]}>
           <Input value={username} onChange={(value) => setUsername(value)} placeholder="Username" />
         </Form.Item>
