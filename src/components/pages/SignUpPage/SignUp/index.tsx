@@ -7,6 +7,10 @@ import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import styles from "./style.module.scss";
 
 const SignUp = () => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [visible, setVisible] = useState(false);
+
   async function onClickSignUp() {
     const request = await axios
       .post(Api.signUp.buildPath(), {
@@ -17,17 +21,13 @@ const SignUp = () => {
       })
       .then((res) => {
         console.log(res.data);
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("AUTH_TOKEN", res.data.token);
       })
       .catch((error) => {
         console.log(error);
       });
     return request;
   }
-
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [visible, setVisible] = useState(false);
 
   console.log("===username===");
   console.log(username);
