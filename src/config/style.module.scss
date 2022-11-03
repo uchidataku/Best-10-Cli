@@ -1,0 +1,19 @@
+@import "../assets/styles/modules";
+
+.app {
+  padding: $space-md $space-sm;
+}
+
+.header {
+  display: flex;
+  background-color: $primary-color;
+  border-radius: 50px;
+  padding: $space-xs $space-sm;
+  margin-bottom: $space-md;
+
+  h2 {
+    color: $white;
+    margin-bottom: 0;
+    font-weight: bold;
+  }
+}

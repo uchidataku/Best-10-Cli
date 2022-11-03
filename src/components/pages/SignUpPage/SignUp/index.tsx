@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
-import { Form, Input, Button } from "antd-mobile";
+import { Form, Input, Button, Toast } from "antd-mobile";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import styles from "./style.module.scss";
 import routes from "../../../../constants/routes";
@@ -25,6 +25,10 @@ const SignUp = () => {
         console.log(res.data);
         localStorage.setItem("AUTH_TOKEN", res.data.token);
         navigate(routes.top());
+        Toast.show({
+          icon: 'success',
+          content: '登録しました',
+        })
       })
       .catch((error) => {
         console.log(error);

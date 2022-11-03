@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
-import { Form, Input, Button } from "antd-mobile";
+import { Form, Input, Button, Toast } from "antd-mobile";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import { useNavigate } from "react-router-dom";
 import routes from "../../../../constants/routes";
@@ -25,6 +25,10 @@ const SignIn = () => {
         console.log(res.data);
         localStorage.setItem("AUTH_TOKEN", res.data.token);
         navigate(routes.top());
+        Toast.show({
+          icon: 'success',
+          content: 'ログインしました',
+        })
       })
       .catch((error) => {
         console.log(error);
