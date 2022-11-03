@@ -8,13 +8,14 @@ import Ranking from "../../../models/Ranking";
 const RankingList = () => {
   const [rankings, setRankings] = useState<Ranking[]>([]);
 
+  async function fetchData() {
+    const request = await axios.get(Api.fetchRankings.buildPath());
+    setRankings(request.data.rankings);
+    return request;
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const request = await axios.get(Api.fetchRankings.buildPath());
-      setRankings(request.data.rankings);
-      return request;
-    }
-    fetchData();
+    fetchData()
   }, []);
 
   return (

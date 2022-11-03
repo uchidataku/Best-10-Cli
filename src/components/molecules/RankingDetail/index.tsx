@@ -26,7 +26,7 @@ const RankingDetail = ({ rankingId }: Props) => {
       return request;
     }
     fetchData();
-  });
+  }, []);
 
   return (
     <div className={styles.rankingDetail}>

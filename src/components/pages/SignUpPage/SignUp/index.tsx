@@ -9,8 +9,10 @@ import styles from "./style.module.scss";
 const SignUp = () => {
   async function onClickSignUp() {
     const request = await axios.post(Api.signUp.buildPath(), {
-      username: username,
-      password: password
+      account: {
+        username: username,
+        password: password
+      }
     })
       .then(res => {
         console.log(res.data);
@@ -23,6 +25,11 @@ const SignUp = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [visible, setVisible] = useState(false);
+
+  console.log("===username===");
+  console.log(username);
+  console.log("===password===");
+  console.log(password);
 
   return (
     <div className={styles.signUp}>
@@ -44,7 +51,7 @@ const SignUp = () => {
           label='ユーザーネーム'
           rules={[{ required: true, message: 'ユーザーネームを入力してください' }]}
         >
-          <Input value={username} onChange={() => setUsername(username)} placeholder='Username' />
+          <Input value={username} onChange={(value) => setUsername(value)} placeholder='Username' />
         </Form.Item>
         <Form.Item
           name='password'
@@ -60,7 +67,7 @@ const SignUp = () => {
             </div>
           }
         >
-          <Input value={password} type={visible ? 'text' : 'password'} onChange={() => setPassword(password)} placeholder='Password' />
+          <Input value={password} type={visible ? 'text' : 'password'} onChange={(value) => setPassword(value)} placeholder='Password' />
         </Form.Item>
       </Form>
       {/*<div>*/}
