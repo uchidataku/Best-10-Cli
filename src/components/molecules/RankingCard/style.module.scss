@@ -23,6 +23,7 @@ p {
     font-weight: bold;
     display: flex;
     align-items: center;
+    max-width: 200px;
 
     p {
       display: inline-block;
@@ -33,15 +34,25 @@ p {
 
   .sub {
     text-align: right;
-  }
 
-  .counts {
-    padding-bottom: $space-xs;
-    color: $support-color;
-  }
+    .counts {
+      padding-bottom: $space-xs;
+      display: flex;
+      color: $support-color;
 
-  .genre {
-    color: $support-color;
-    margin: 0;
+      //.itemsCount {
+      //  color: $support-color;
+      //  margin-right: $space-xs;
+      //}
+      //
+      //.likesCount {
+      //  color: $support-color;
+      //}
+    }
+
+    .genre {
+      color: $support-color;
+      margin: 0;
+    }
   }
 }
