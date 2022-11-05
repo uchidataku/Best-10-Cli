@@ -15,7 +15,9 @@ const RankingCard = (ranking: Ranking) => {
           </div>
           <div className={styles.sub}>
             <div className={styles.counts}>
-              <p>{ ranking.itemsCount } items / { ranking.allLikesCount } likes</p>
+              <p>
+                {ranking.itemsCount} items / {ranking.allLikesCount} likes
+              </p>
             </div>
             <Tag className={styles.genre}>{genreLabelFor(ranking?.genre)}</Tag>
           </div>
