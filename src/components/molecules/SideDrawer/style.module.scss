@@ -1,0 +1,42 @@
+@import "../../../assets/styles/modules";
+
+.sideDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  max-width: 300px;
+  z-index: 200;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  background-color: $dark-gray;
+  transform: translateX(100%);
+  transition: 0.1s;
+
+}
+
+.sideDrawerOpen {
+  transform: translateX(0%);
+}
+
+.menu {
+  padding: $space-xl $space-sm;
+
+  .menuItem {
+    padding-bottom: $space-md;
+
+    a {
+      font-size: $f-size-md;
+      font-weight: bold;
+      color: $white;
+    }
+  }
+}
+
+
+//.sideDrawerClose {
+//  display: none;
+//  transition: 5s;
+//}

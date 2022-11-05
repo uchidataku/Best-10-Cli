@@ -7,6 +7,10 @@ const Api = {
     path: "/sign_up",
     buildPath: () => "/sign_up",
   },
+  fetchCurrentAccount: {
+    path: "/current_user",
+    buildPath: () => "/current_user",
+  },
   fetchRankings: {
     path: "/rankings",
     buildPath: () => "/rankings",

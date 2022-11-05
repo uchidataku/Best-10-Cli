@@ -12,10 +12,11 @@
   padding: $space-xs $space-sm;
   margin-bottom: $space-md;
 
-  h2 {
+  .logo {
     color: $white;
     margin-bottom: 0;
     font-weight: bold;
+    font-size: $f-size-xl;
   }
 
   .menuIcon {
