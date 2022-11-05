@@ -4,13 +4,14 @@
   border-width: 0.9px;
   border-radius: $radius-sm;
   border-color: $support-color;
-  margin-bottom: $space-sm;
+  margin-bottom: $space-xs;
 }
 
-.dropdown {
-  min-width: 100%;
-  border-width: 0.9px;
+.searchButton {
+  width: 100%;
+  background-color: $secondary-color;
+  color: $white;
+  font-weight: bold;
   border-radius: $radius-sm;
-  border-color: $support-color;
-  color: $support-color;
+  margin-bottom: $space-sm;
 }
