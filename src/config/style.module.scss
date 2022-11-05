@@ -6,6 +6,7 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
   background-color: $primary-color;
   border-radius: 50px;
   padding: $space-xs $space-sm;
@@ -15,5 +16,10 @@
     color: $white;
     margin-bottom: 0;
     font-weight: bold;
+  }
+
+  .menuIcon {
+    font-size: 30px;
+    color: $white;
   }
 }
