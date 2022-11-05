@@ -4,7 +4,6 @@ import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
 import classnames from "classnames";
 import axios from "axios";
 import Api from "../../../config/qpi";
-import Account from "../../../models/Account";
 import Item from "../../../models/Item";
 
 type Props = {
@@ -13,8 +12,6 @@ type Props = {
 };
 
 const RankingDetailItem = ({ rank, item }: Props) => {
-  const [account, setAccount] = useState<Account>();
-
   function getDetailItemClassName() {
     if (rank < 11) {
       return styles.rankingDetailItem;
@@ -37,9 +34,7 @@ const RankingDetailItem = ({ rank, item }: Props) => {
   }
 
   async function onClickCreateLike(itemId: string) {
-    if (!account) return;
-
-    // TODO: currentAccount渡す
+    // TODO: currentAccountいなかったらできないように
     await axios.post(Api.createLike.buildPath(itemId));
   }
 

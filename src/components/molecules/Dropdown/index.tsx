@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import { DownOutline, UpOutline } from "antd-mobile-icons";
 import DropdownMenu from "./DropdownMenu";
-import { GENRE } from "../../../models/Ranking/helpers";
-import classNames from "classnames";
+// import { GENRE } from "../../../models/Ranking/helpers";
 // import { Genre } from "../../../models/Ranking/helpers";
 
 type Props = {
