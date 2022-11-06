@@ -51,6 +51,10 @@ const RankingDetail = ({ rankingId }: Props) => {
     return request;
   }
 
+  const refetchData = (): void => {
+    fetchData();
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -68,7 +72,7 @@ const RankingDetail = ({ rankingId }: Props) => {
       </div>
       <div className={styles.rankingDetailItems}>
         {items.map((item, idx) => (
-          <RankingDetailItem key={item.id} rank={idx + 1} item={item} />
+          <RankingDetailItem key={item.id} rank={idx + 1} item={item} refetchData={refetchData}/>
         ))}
       </div>
       <form className={styles.addItem} onSubmit={handleSubmit(onSubmit)}>

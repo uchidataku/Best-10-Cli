@@ -31,6 +31,10 @@ const Api = {
     path: "/items/:itemId/likes",
     buildPath: (itemId: string) => "/items/" + itemId + "/likes",
   },
+  deleteLike: {
+    path: "/items/:itemId/likes",
+    buildPath: (itemId: string) => "/items/" + itemId + "/likes",
+  },
 };
 
 export default Api;

@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./style.module.scss";
 import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
 import classnames from "classnames";
-import axios from "axios";
+import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
 import Item from "../../../models/Item";
 
 type Props = {
   rank: number;
   item: Item;
+  refetchData: () => void;
 };
 
-const RankingDetailItem = ({ rank, item }: Props) => {
+const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
   function getDetailItemClassName() {
     if (rank < 11) {
       return styles.rankingDetailItem;
@@ -35,7 +36,41 @@ const RankingDetailItem = ({ rank, item }: Props) => {
 
   async function onClickCreateLike(itemId: string) {
     // TODO: currentAccountいなかったらできないように
-    await axios.post(Api.createLike.buildPath(itemId));
+    await axios
+      .post(Api.createLike.buildPath(itemId))
+      .then((res) => {
+        console.log(res.data);
+        refetchData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async function onClickDeleteLike(itemId: string) {
+    // TODO: currentAccountいなかったらできないように
+    await axios
+      .delete(Api.deleteLike.buildPath(itemId))
+      .then((res) => {
+        console.log(res.data);
+        refetchData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  let icon;
+  if (item.isLiked === true) {
+    icon = <HeartTwoTone
+      style={{fontSize: "16px"}}
+      twoToneColor="#d73a49"
+      onClick={() => onClickDeleteLike(item.id)}
+    />
+  } else {
+    icon = <HeartOutlined
+      style={{fontSize: "16px"}}
+      onClick={() => onClickCreateLike(item.id)} />
   }
 
   return (
@@ -47,7 +82,7 @@ const RankingDetailItem = ({ rank, item }: Props) => {
       </div>
       <div className={styles.like}>
         <p className={styles.likeCount}>{item.likesCount} likes</p>
-        {item.isLiked === true ? <HeartTwoTone twoToneColor="#d73a49" /> : <HeartOutlined onClick={() => onClickCreateLike(item.id)} />}
+        {icon}
       </div>
     </div>
   );
