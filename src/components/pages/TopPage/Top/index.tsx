@@ -8,7 +8,7 @@ import Api from "../../../../config/qpi";
 import { Button } from "antd";
 import { ContentOutline } from "antd-mobile-icons";
 import Select from "react-select";
-import { GenreObjects, SORT_BY, SortByObjects } from "../../../../models/Ranking/helpers";
+import { GenreObjects, SortByObjects } from "../../../../models/Ranking/helpers";
 
 type QueryInput = {
   keyword?: string;
@@ -24,7 +24,6 @@ const Top = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
   } = useForm<QueryInput>();
 
   const onSubmit = (data: QueryInput) => {
@@ -69,7 +68,7 @@ const Top = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Controller name="keyword" control={control} render={({ field: { onChange, value } }) => <input className={styles.searchBar} value={value} placeholder="キーワード" onChange={onChange} />} />
         <Controller name="genre" control={control} render={({ field }) => <Select {...field} className={styles.genreInput} placeholder="ジャンル" options={GenreObjects} />} />

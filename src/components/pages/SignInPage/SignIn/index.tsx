@@ -44,7 +44,7 @@ const SignIn = () => {
       <Form
         layout="vertical"
         footer={
-          <Button block onClick={() => onClickSignIn()} type="submit" color="primary" size="large">
+          <Button block onClick={() => onClickSignIn()} type="submit" color="primary" size="middle">
             ログイン
           </Button>
         }

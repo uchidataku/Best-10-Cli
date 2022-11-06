@@ -41,11 +41,10 @@ const SignUp = () => {
       <div className={styles.title}>
         <p>新規登録</p>
       </div>
-
       <Form
         layout="vertical"
         footer={
-          <Button block onClick={() => onClickSignUp()} type="submit" color="primary" size="large">
+          <Button block onClick={() => onClickSignUp()} type="submit" color="primary" size="middle">
             登録
           </Button>
         }
@@ -62,22 +61,6 @@ const SignUp = () => {
           <Input value={password} type={visible ? "text" : "password"} onChange={(value) => setPassword(value)} placeholder="Password" />
         </Form.Item>
       </Form>
-      {/*<div>*/}
-      {/*  <div className={styles.username}>*/}
-      {/*    <p className={styles.usernameTag}>ユーザーネーム</p>*/}
-      {/*    /!*<input className={styles.usernameInput} type="text" placeholder="Username" />*!/*/}
-      {/*    <Input className={styles.usernameInput} size="small" placeholder="Username" />*/}
-      {/*  </div>*/}
-      {/*  <div className={styles.password}>*/}
-      {/*    <p>パスワード</p>*/}
-      {/*    /!*<input className={styles.passwordInput} type="password" placeholder="Password" />*!/*/}
-      {/*    <Input.Password size="small" placeholder="Password" />*/}
-      {/*  </div>*/}
-
-      {/*  <Button type="primary" onClick={() => onClickSignUp()}>*/}
-      {/*    登録*/}
-      {/*  </Button>*/}
-      {/*</div>*/}
     </div>
   );
 };

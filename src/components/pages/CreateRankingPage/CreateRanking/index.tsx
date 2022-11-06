@@ -66,7 +66,7 @@ const CreateRanking = () => {
             </div>
           )}
         />
-        <Button className={styles.button} onClick={handleSubmit(onSubmit)}>
+        <Button className={styles.createButton} onClick={handleSubmit(onSubmit)}>
           作成する
         </Button>
       </form>

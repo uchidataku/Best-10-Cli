@@ -45,7 +45,6 @@ export const GENRES = [
 export type Genres = typeof GENRES[number];
 
 export const GenreObjects = [
-  { value: "unspecified", label: "指定なし" },
   { value: "entertainment", label: "エンタメ・趣味" },
   { value: "music", label: "音楽" },
   { value: "nature", label: "自然" },
@@ -64,12 +63,11 @@ export const GenreObjects = [
   { value: "it", label: "IT" },
   { value: "travel", label: "旅行・お出かけ" },
   { value: "education", label: "教育" },
+  { value: "unspecified", label: "その他" },
 ];
 
 export function genreLabelFor(genre?: Genre) {
   switch (genre) {
-    case "unspecified":
-      return "指定なし";
     case "entertainment":
       return "エンタメ・趣味";
     case "music":
@@ -106,6 +104,8 @@ export function genreLabelFor(genre?: Genre) {
       return "旅行・お出かけ";
     case "education":
       return "教育";
+    case "unspecified":
+      return "その他";
     default:
       throw new Error("予期しない値です");
   }

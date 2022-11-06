@@ -9,51 +9,54 @@
     }
   }
 
-  .title {
-    margin-bottom: $space-md;
+  .form {
+    .title {
+      margin-bottom: $space-md;
 
-    .titleLabel {
-      width: 100%;
-      margin-bottom: $space-xs;
+      .titleLabel {
+        width: 100%;
+        margin-bottom: $space-xs;
+      }
+
+      .titleInput {
+        border-width: 0.9px;
+        border-radius: $radius-sm;
+        border-color: $support-color;
+        margin-right: $space-xs;
+        width: 100%;
+        height: $size-xxl;
+      }
     }
 
-    .titleInput {
-      border-width: 0.9px;
+    .genre {
+      margin-bottom: $space-md;
+
+      .genreLabel {
+        width: 100%;
+        margin-bottom: $space-xs;
+      }
+
+      .genreInput {
+        border-width: 0.9px;
+        border-radius: $radius-sm;
+        border-color: $support-color;
+        margin-right: $space-xs;
+        width: 100%;
+        height: $size-xl;
+      }
+
+      .genreOption {
+        font-size: $f-size-xl;
+      }
+    }
+
+    .createButton {
+      width: 100%;
+      background-color: $secondary-color;
+      color: $white;
+      font-weight: bold;
       border-radius: $radius-sm;
-      border-color: $support-color;
-      margin-right: $space-xs;
-      width: 100%;
-      height: $size-xl;
+      margin-top: $space-sm;
     }
-  }
-
-  .genre {
-    margin-bottom: $space-md;
-
-    .genreLabel {
-      width: 100%;
-      margin-bottom: $space-xs;
-    }
-
-    .genreInput {
-      border-width: 0.9px;
-      border-radius: $radius-sm;
-      border-color: $support-color;
-      margin-right: $space-xs;
-      width: 100%;
-      height: $size-xl;
-    }
-
-    .genreOption {
-      font-size: $f-size-xl;
-    }
-  }
-
-  .button {
-    background-color: $secondary-color;
-    color: $white;
-    font-weight: bold;
-    border-radius: $radius-sm;
-    margin: $space-sm 0;
   }
 }
