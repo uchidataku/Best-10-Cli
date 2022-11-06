@@ -4,6 +4,7 @@ const routes = {
   signUp: (): string => "/sign_up",
   ranking: (): string => "/rankings/:id",
   rankings: (): string => "/rankings",
+  information: (): string => "/information",
 };
 
 export default routes;
