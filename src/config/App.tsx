@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PageRoutes from "./PageRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
 import styles from "./style.module.scss";
-import { InstagramOutlined, MenuOutlined, TwitterOutlined } from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import SideDrawer from "../components/molecules/SideDrawer";
 import BackDrop from "../components/molecules/BackDrop";
 import routes from "../constants/routes";

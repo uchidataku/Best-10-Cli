@@ -62,15 +62,9 @@ const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
 
   let icon;
   if (item.isLiked === true) {
-    icon = <HeartTwoTone
-      style={{fontSize: "16px"}}
-      twoToneColor="#d73a49"
-      onClick={() => onClickDeleteLike(item.id)}
-    />
+    icon = <HeartTwoTone style={{ fontSize: "16px" }} twoToneColor="#d73a49" onClick={() => onClickDeleteLike(item.id)} />;
   } else {
-    icon = <HeartOutlined
-      style={{fontSize: "16px"}}
-      onClick={() => onClickCreateLike(item.id)} />
+    icon = <HeartOutlined style={{ fontSize: "16px" }} onClick={() => onClickCreateLike(item.id)} />;
   }
 
   return (

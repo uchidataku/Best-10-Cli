@@ -17,7 +17,7 @@ type Props = {
 
 type FormInput = {
   name: string;
-}
+};
 
 const RankingDetail = ({ rankingId }: Props) => {
   const [ranking, setRanking] = useState<Ranking>();
@@ -27,7 +27,7 @@ const RankingDetail = ({ rankingId }: Props) => {
   const onSubmit = (data: FormInput) => {
     axios
       .post(Api.createRankingItem.buildPath(rankingId), {
-        item: { ...data }
+        item: { ...data },
       })
       .then((res) => {
         console.log(res.data);
@@ -53,7 +53,7 @@ const RankingDetail = ({ rankingId }: Props) => {
 
   const refetchData = (): void => {
     fetchData();
-  }
+  };
 
   useEffect(() => {
     fetchData();
@@ -72,16 +72,14 @@ const RankingDetail = ({ rankingId }: Props) => {
       </div>
       <div className={styles.rankingDetailItems}>
         {items.map((item, idx) => (
-          <RankingDetailItem key={item.id} rank={idx + 1} item={item} refetchData={refetchData}/>
+          <RankingDetailItem key={item.id} rank={idx + 1} item={item} refetchData={refetchData} />
         ))}
       </div>
       <form className={styles.addItem} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          className={styles.addItemInput}
-          placeholder={ranking?.title}
-          {...register("name")}
-        />
-        <Button className={styles.addItemButton} onClick={handleSubmit(onSubmit)}>追加する</Button>
+        <input className={styles.addItemInput} placeholder={ranking?.title} {...register("name")} />
+        <Button className={styles.addItemButton} onClick={handleSubmit(onSubmit)}>
+          追加する
+        </Button>
       </form>
     </div>
   );

@@ -14,7 +14,7 @@ type Query = {
   keyword: string;
   genre: string;
   sortBy: string;
-}
+};
 
 const Top = () => {
   const [rankings, setRankings] = useState<Ranking[]>([]);
@@ -40,17 +40,13 @@ const Top = () => {
 
   return (
     <div className="App">
-      <input
-        className={styles.searchBar}
-        placeholder="キーワード"
-        {...register('keyword')}
-      />
+      <input className={styles.searchBar} placeholder="キーワード" {...register("keyword")} />
       <Dropdown placeholder="ジャンル" />
       <Dropdown defaultValue="人気順" />
       <Button className={styles.searchButton}>検索</Button>
-        <div className={styles.rankingsCount}>
-            <ContentOutline /> {rankingsCount}
-        </div>
+      <div className={styles.rankingsCount}>
+        <ContentOutline /> {rankingsCount}
+      </div>
       <RankingList rankings={rankings} />
     </div>
   );
