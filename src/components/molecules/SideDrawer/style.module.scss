@@ -7,6 +7,7 @@
   height: 100%;
   width: 50%;
   max-width: 300px;
+  min-width: 180px;
   z-index: 200;
   cursor: pointer;
   display: flex;
@@ -22,9 +23,14 @@
 
 .menu {
   padding: $space-xl $space-sm;
+  display: flex;
+  flex-flow:column;
+  justify-content:space-between;
+  min-width: 180px;
 
   .menuItem {
-    padding-bottom: $space-md;
+    margin-bottom: $space-xl;
+    text-align: center;
 
     a {
       font-size: $f-size-md;
@@ -32,9 +38,22 @@
       color: $white;
     }
   }
-}
 
-//.sideDrawerClose {
-//  display: none;
-//  transition: 5s;
-//}
+  .info {
+    margin-bottom: $space-xl;
+
+    a {
+      font-size: $f-size-md;
+      font-weight: bold;
+      color: $white;
+    }
+  }
+
+  .snsIcons {
+    color: $white;
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    font-size: $f-size-md;
+  }
+}

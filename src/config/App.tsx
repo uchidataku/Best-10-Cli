@@ -9,7 +9,6 @@ import routes from "../constants/routes";
 import axios from "../config/axios";
 import Api from "../config/qpi";
 import Account from "../models/Account";
-import Footer from "../components/molecules/Footer";
 
 function App() {
   const [account, setAccount] = useState<Account>();
@@ -58,7 +57,6 @@ function App() {
         <SideDrawer isOpen={isOpen} isLogin={isLogin} />
         {backdrop}
       </div>
-      <Footer />
     </div>
   );
 }
