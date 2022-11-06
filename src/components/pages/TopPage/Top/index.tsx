@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import RankingList from "../../../molecules/RankingList";
 import { SearchBar } from "antd-mobile";
 import styles from "./style.module.scss";
@@ -9,9 +10,22 @@ import Dropdown from "../../../molecules/Dropdown";
 import { Button } from "antd";
 import { ContentOutline } from "antd-mobile-icons";
 
+type Query = {
+  keyword: string;
+  genre: string;
+  sortBy: string;
+}
+
 const Top = () => {
   const [rankings, setRankings] = useState<Ranking[]>([]);
   const [rankingsCount, setRankingsCount] = useState(0);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Query>();
 
   async function fetchData() {
     const request = await axios.get(Api.fetchRankings.buildPath());
@@ -26,7 +40,11 @@ const Top = () => {
 
   return (
     <div className="App">
-      <SearchBar className={styles.searchBar} placeholder="キーワード" />
+      <input
+        className={styles.searchBar}
+        placeholder="キーワード"
+        {...register('keyword')}
+      />
       <Dropdown placeholder="ジャンル" />
       <Dropdown defaultValue="人気順" />
       <Button className={styles.searchButton}>検索</Button>

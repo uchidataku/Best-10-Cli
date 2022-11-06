@@ -27,17 +27,12 @@ function App() {
   useEffect(() => {
     async function fetchAccount() {
       const request = await axios.get(Api.fetchCurrentAccount.buildPath());
-      console.log("===request====");
-      console.log(request.data);
       if (request.data !== null) {
         setAccount(request.data);
         setIsLogin(true);
       }
       return request;
     }
-
-    console.log("~~~account~~~~~");
-    console.log(account);
 
     if (!account) {
       fetchAccount();

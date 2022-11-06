@@ -5,6 +5,7 @@
   border-radius: $radius-sm;
   border-color: $support-color;
   margin-bottom: $space-xs;
+  width: 100%;
 }
 
 .searchButton {
@@ -13,9 +14,9 @@
   color: $white;
   font-weight: bold;
   border-radius: $radius-sm;
-  margin-bottom: $space-sm;
 }
 
 .rankingsCount {
   text-align: right;
+  margin: $space-xs 0;
 }
