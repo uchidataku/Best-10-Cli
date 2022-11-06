@@ -20,4 +20,25 @@
 
   .rankingDetailItems {
   }
+
+  .addItem {
+    display: flex;
+    width: 100%;
+    margin-top: $space-md;
+
+    .addItemInput {
+      border-width: 0.9px;
+      border-radius: $radius-sm;
+      border-color: $support-color;
+      margin-right: $space-xs;
+      width: 100%;
+    }
+
+    .addItemButton {
+      background-color: $secondary-color;
+      color: $white;
+      font-weight: bold;
+      border-radius: $radius-sm;
+    }
+  }
 }
