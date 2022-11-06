@@ -1,36 +1,66 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import RankingList from "../../../molecules/RankingList";
-import { SearchBar } from "antd-mobile";
 import styles from "./style.module.scss";
 import Ranking from "../../../../models/Ranking";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
-import Dropdown from "../../../molecules/Dropdown";
 import { Button } from "antd";
 import { ContentOutline } from "antd-mobile-icons";
+import Select from "react-select";
+import { GenreObjects, SORT_BY, SortByObjects } from "../../../../models/Ranking/helpers";
 
-type Query = {
-  keyword: string;
-  genre: string;
-  sortBy: string;
+type QueryInput = {
+  keyword?: string;
+  genre?: { value: string; label: string };
+  sortBy?: { value: string; label: string };
 };
 
 const Top = () => {
   const [rankings, setRankings] = useState<Ranking[]>([]);
   const [rankingsCount, setRankingsCount] = useState(0);
+  const defaultSortByParams = SortByObjects[0];
 
   const {
-    register,
     handleSubmit,
-    reset,
+    control,
     formState: { errors },
-  } = useForm<Query>();
+  } = useForm<QueryInput>();
+
+  const onSubmit = (data: QueryInput) => {
+    axios
+      .get(Api.fetchRankings.buildPath(), {
+        params: {
+          keyword: data?.keyword,
+          genre: data?.genre?.value,
+          sortBy: data?.sortBy?.value ? data.sortBy.value : defaultSortByParams.value,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setRankings(res.data.rankings);
+        setRankingsCount(res.data.totalDataNums);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   async function fetchData() {
-    const request = await axios.get(Api.fetchRankings.buildPath());
-    setRankings(request.data.rankings);
-    setRankingsCount(request.data.totalDataNums);
+    const request = await axios
+      .get(Api.fetchRankings.buildPath(), {
+        params: {
+          sortBy: defaultSortByParams.value,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setRankings(res.data.rankings);
+        setRankingsCount(res.data.totalDataNums);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     return request;
   }
 
@@ -40,10 +70,14 @@ const Top = () => {
 
   return (
     <div className="App">
-      <input className={styles.searchBar} placeholder="キーワード" {...register("keyword")} />
-      <Dropdown placeholder="ジャンル" />
-      <Dropdown defaultValue="人気順" />
-      <Button className={styles.searchButton}>検索</Button>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <Controller name="keyword" control={control} render={({ field: { onChange, value } }) => <input className={styles.searchBar} value={value} placeholder="キーワード" onChange={onChange} />} />
+        <Controller name="genre" control={control} render={({ field }) => <Select {...field} className={styles.genreInput} placeholder="ジャンル" options={GenreObjects} />} />
+        <Controller name="sortBy" control={control} render={({ field }) => <Select {...field} className={styles.sortByInput} defaultValue={defaultSortByParams} options={SortByObjects} />} />
+        <Button className={styles.searchButton} onClick={handleSubmit(onSubmit)}>
+          検索
+        </Button>
+      </form>
       <div className={styles.rankingsCount}>
         <ContentOutline /> {rankingsCount}
       </div>

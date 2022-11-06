@@ -15,7 +15,6 @@ function App() {
   const [account, setAccount] = useState<Account>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
-
   const closeSideDrawer = (): void => {
     setIsOpen(false);
   };
@@ -25,16 +24,16 @@ function App() {
     setIsOpen(true);
   }
 
-  useEffect(() => {
-    async function fetchAccount() {
-      const request = await axios.get(Api.fetchCurrentAccount.buildPath());
-      if (request.data !== null) {
-        setAccount(request.data);
-        setIsLogin(true);
-      }
-      return request;
+  async function fetchAccount() {
+    const request = await axios.get(Api.fetchCurrentAccount.buildPath());
+    if (request.data !== null) {
+      setAccount(request.data);
+      setIsLogin(true);
     }
+    return request;
+  }
 
+  useEffect(() => {
     if (!account) {
       fetchAccount();
     } else {

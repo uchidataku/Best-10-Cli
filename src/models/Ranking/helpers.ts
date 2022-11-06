@@ -110,3 +110,14 @@ export function genreLabelFor(genre?: Genre) {
       throw new Error("予期しない値です");
   }
 }
+
+export const SORT_BY = {
+  popularity: "popularity",
+  newest_to_oldest: "newest_to_oldest",
+} as const;
+export type SortBy = typeof SORT_BY[keyof typeof SORT_BY];
+
+export const SortByObjects = [
+  { value: "popularity", label: "人気順" },
+  { value: "newest_to_oldest", label: "新着順" },
+];
