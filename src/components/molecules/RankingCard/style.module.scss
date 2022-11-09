@@ -13,6 +13,10 @@ p {
   padding: $space-xs;
   margin-bottom: $space-sm;
 
+  :hover {
+    opacity: 0.5;
+  }
+
   .item {
     display: flex;
     justify-content: space-between;

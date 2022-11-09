@@ -42,3 +42,12 @@
     }
   }
 }
+
+.loadMoreButton {
+  text-align: center;
+}
+
+.loadMoreButton:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}

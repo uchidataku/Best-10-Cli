@@ -10,6 +10,8 @@ import { genreLabelFor } from "../../../models/Ranking/helpers";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import { Toast } from "antd-mobile";
+import { DownOutline } from "antd-mobile-icons";
+import LoadMoreItems from "./loadMoreItems";
 
 type Props = {
   rankingId: string;
@@ -22,7 +24,9 @@ type FormInput = {
 const RankingDetail = ({ rankingId }: Props) => {
   const [ranking, setRanking] = useState<Ranking>();
   const [creator, setCreator] = useState<Account>();
-  const [items, setItems] = useState<Item[]>([]);
+  const [best10Items, setBest10Items] = useState<Item[]>([]);
+  const [otherItems, setOtherItems] = useState<Item[]>([]);
+  const [loadMore, setloadMore] = useState(false);
   const { register, handleSubmit, reset } = useForm<FormInput>();
   const onSubmit = (data: FormInput) => {
     axios
@@ -47,13 +51,21 @@ const RankingDetail = ({ rankingId }: Props) => {
     const request = await axios.get(Api.fetchRanking.buildPath(rankingId));
     setRanking(request.data);
     setCreator(request.data.creator);
-    setItems(request.data.items);
+    setBest10Items(request.data.items.splice(0, 10));
+    setOtherItems(request.data.items.splice(10));
     return request;
   }
 
   const refetchData = (): void => {
     fetchData();
   };
+
+  let loadMoreItems;
+  if (loadMore == true) {
+    loadMoreItems = <LoadMoreItems items={otherItems} refetchData={refetchData} />
+  } else {
+    loadMoreItems = <div className={styles.loadMoreButton} onClick={() => setloadMore(true)}>load more <DownOutline /></div>
+  }
 
   useEffect(() => {
     fetchData();
@@ -71,12 +83,13 @@ const RankingDetail = ({ rankingId }: Props) => {
         </div>
       </div>
       <div className={styles.rankingDetailItems}>
-        {items.map((item, idx) => (
+        {best10Items.map((item, idx) => (
           <RankingDetailItem key={item.id} rank={idx + 1} item={item} refetchData={refetchData} />
         ))}
+        {loadMoreItems}
       </div>
       <form className={styles.addItem} onSubmit={handleSubmit(onSubmit)}>
-        <input className={styles.addItemInput} placeholder={ranking?.title} {...register("name")} />
+        <input className={styles.addItemInput} placeholder={ranking?.title.slice(0, -8)} {...register("name")} />
         <Button className={styles.addItemButton} onClick={handleSubmit(onSubmit)}>
           追加する
         </Button>
