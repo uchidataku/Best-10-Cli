@@ -4,7 +4,7 @@ p {
   margin: 0;
 }
 
-.RankingCard {
+.rankingCard {
   background-color: $content-bg-color;
   border-color: $primary-color;
   border-style: solid;
@@ -13,50 +13,47 @@ p {
   padding: $space-xs;
   margin-bottom: $space-sm;
 
-  :hover {
-    opacity: 0.5;
-  }
-
   .item {
     display: flex;
     justify-content: space-between;
-  }
+    margin-bottom: $space-xs;
 
-  .title {
-    font-size: $f-size-md;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    max-width: 200px;
+    .title {
+      font-size: $f-size-md;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      max-width: 250px;
 
-    p {
-      display: inline-block;
-      vertical-align: middle;
-      color: $black;
+      p {
+        display: inline-block;
+        vertical-align: middle;
+        color: $black;
+      }
     }
-  }
-
-  .sub {
-    text-align: right;
 
     .counts {
-      padding-bottom: $space-xs;
-      display: flex;
-      color: $support-color;
+      .itemsCount {
+        color: $support-color;
+        margin-bottom: $space-base;
+      }
 
-      //.itemsCount {
-      //  color: $support-color;
-      //  margin-right: $space-xs;
-      //}
-      //
-      //.likesCount {
-      //  color: $support-color;
-      //}
+      .likesCount {
+        color: $support-color;
+      }
     }
+  }
+
+  .genres {
+    width: 100%;
 
     .genre {
       color: $support-color;
-      margin: 0;
+      margin-right: $space-base;
     }
   }
+}
+
+.rankingCard:hover {
+  opacity: 0.5;
 }

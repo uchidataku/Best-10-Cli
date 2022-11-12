@@ -1,11 +1,11 @@
-import { Genre } from "./helpers";
+import Genre from "../Genre";
 
 interface Ranking {
   id: string;
   title: string;
-  genre: Genre;
   itemsCount: number;
   allLikesCount: number;
+  genres: Genre[];
 }
 
 export default Ranking;

@@ -6,8 +6,7 @@ import RankingDetailItem from "../RankingDetailItem";
 import Account from "../../../models/Account";
 import Item from "../../../models/Item";
 import Ranking from "../../../models/Ranking";
-import { genreLabelFor } from "../../../models/Ranking/helpers";
-import { Button } from "antd";
+import { Button, Tag } from "antd";
 import { useForm } from "react-hook-form";
 import { Toast } from "antd-mobile";
 import { DownOutline } from "antd-mobile-icons";
@@ -78,8 +77,14 @@ const RankingDetail = ({ rankingId }: Props) => {
           <p>{ranking?.title}</p>
         </div>
         <div className={styles.rankingSubInfo}>
-          <p>created by {creator?.username}</p>
-          {/*<p>{genreLabelFor(ranking?.genre)}</p>*/}
+          <div className={styles.creator}>
+            <p>created by {creator?.username}</p>
+          </div>
+          <div className={styles.genres}>
+            {ranking?.genres.map((genre, idx) => (
+              <Tag className={styles.genre} key={idx}>{genre.name}</Tag>
+            ))}
+          </div>
         </div>
       </div>
       <div className={styles.rankingDetailItems}>

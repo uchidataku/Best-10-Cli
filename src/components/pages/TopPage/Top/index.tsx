@@ -78,7 +78,7 @@ const Top = () => {
           検索
         </Button>
       </form>
-      <GenreCheckboxGroup />
+      {/*<GenreCheckboxGroup />*/}
       <div className={styles.rankingsCount}>
         <ContentOutline /> {rankingsCount}
       </div>

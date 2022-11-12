@@ -13,9 +13,19 @@
   }
 
   .rankingSubInfo {
-    display: flex;
-    justify-content: space-between;
-    color: $support-color;
+    .creator {
+      color: $support-color;
+      margin-bottom: $space-base;
+    }
+
+    .genres {
+      width: 100%;
+
+      .genre {
+        color: $support-color;
+        margin-right: $space-base;
+      }
+    }
   }
 
   .rankingDetailItems {
