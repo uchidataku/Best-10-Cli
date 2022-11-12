@@ -24,8 +24,8 @@
 .menu {
   padding: $space-xl $space-sm;
   display: flex;
-  flex-flow:column;
-  justify-content:space-between;
+  flex-flow: column;
+  justify-content: space-between;
   min-width: 180px;
 
   .menuItem {
@@ -53,7 +53,7 @@
     color: $white;
     width: 100%;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     font-size: $f-size-md;
   }
 }

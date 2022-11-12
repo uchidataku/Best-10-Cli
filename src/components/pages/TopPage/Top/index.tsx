@@ -5,11 +5,12 @@ import styles from "./style.module.scss";
 import Ranking from "../../../../models/Ranking";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
-import { Button, Checkbox } from "antd";
+import { Button } from "antd";
 import { ContentOutline } from "antd-mobile-icons";
 import Select from "react-select";
 import { GenreObjects, SortByObjects } from "../../../../models/Ranking/helpers";
-import GenreCheckboxGroup from "../../../molecules/GenreCheckboxGroup";
+import GenreCheckboxModal from "../../../molecules/GenreCheckboxModal";
+import BackDrop from "../../../molecules/BackDrop";
 
 type QueryInput = {
   keyword?: string;
@@ -20,12 +21,15 @@ type QueryInput = {
 const Top = () => {
   const [rankings, setRankings] = useState<Ranking[]>([]);
   const [rankingsCount, setRankingsCount] = useState(0);
+  const [openGenreModal, setOpenGenreModal] = useState(false);
   const defaultSortByParams = SortByObjects[0];
+  const closeSideDrawer = (): void => {
+    setOpenGenreModal(false);
+  };
+  const genreModal = openGenreModal ? <GenreCheckboxModal /> : "";
+  const backdrop = openGenreModal ? <BackDrop closeSideDrawer={closeSideDrawer} /> : "";
 
-  const {
-    handleSubmit,
-    control,
-  } = useForm<QueryInput>();
+  const { handleSubmit, control } = useForm<QueryInput>();
 
   const onSubmit = (data: QueryInput) => {
     axios
@@ -78,7 +82,9 @@ const Top = () => {
           検索
         </Button>
       </form>
-      {/*<GenreCheckboxGroup />*/}
+      <button onClick={() => setOpenGenreModal(true)}>genre</button>
+      {genreModal}
+      {backdrop}
       <div className={styles.rankingsCount}>
         <ContentOutline /> {rankingsCount}
       </div>

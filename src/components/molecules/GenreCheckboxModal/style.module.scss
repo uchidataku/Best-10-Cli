@@ -1,17 +1,12 @@
 @import "../../../assets/styles/modules";
 
-.genreCheckboxGroup {
+.genreCheckboxModal {
   position: fixed;
   top: 100px;
   right: 30px;
   left: 30px;
   z-index: 200;
-  background-color: $dark-gray;
+  background-color: $white;
   padding: $space-xl $space-md;
   border-radius: $radius-md;
-
-  .dropDownLabel {
-    color: $black;
-    font-weight: bold;
-  }
 }

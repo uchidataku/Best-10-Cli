@@ -61,9 +61,13 @@ const RankingDetail = ({ rankingId }: Props) => {
 
   let loadMoreItems;
   if (loadMore == true) {
-    loadMoreItems = <LoadMoreItems items={otherItems} refetchData={refetchData} />
+    loadMoreItems = <LoadMoreItems items={otherItems} refetchData={refetchData} />;
   } else {
-    loadMoreItems = <div className={styles.loadMoreButton} onClick={() => setloadMore(true)}>load more <DownOutline /></div>
+    loadMoreItems = (
+      <div className={styles.loadMoreButton} onClick={() => setloadMore(true)}>
+        load more <DownOutline />
+      </div>
+    );
   }
 
   useEffect(() => {
@@ -82,7 +86,9 @@ const RankingDetail = ({ rankingId }: Props) => {
           </div>
           <div className={styles.genres}>
             {ranking?.genres.map((genre, idx) => (
-              <Tag className={styles.genre} key={idx}>{genre.name}</Tag>
+              <Tag className={styles.genre} key={idx}>
+                {genre.name}
+              </Tag>
             ))}
           </div>
         </div>

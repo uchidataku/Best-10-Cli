@@ -23,7 +23,9 @@ const RankingCard = (ranking: Ranking) => {
         </div>
         <div className={styles.genres}>
           {ranking.genres.map((genre, idx) => (
-            <Tag className={styles.genre} key={idx}>{genre.name}</Tag>
+            <Tag className={styles.genre} key={idx}>
+              {genre.name}
+            </Tag>
           ))}
         </div>
       </div>
