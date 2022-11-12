@@ -5,10 +5,11 @@ import styles from "./style.module.scss";
 import Ranking from "../../../../models/Ranking";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
-import { Button } from "antd";
+import { Button, Checkbox } from "antd";
 import { ContentOutline } from "antd-mobile-icons";
 import Select from "react-select";
 import { GenreObjects, SortByObjects } from "../../../../models/Ranking/helpers";
+import GenreCheckboxGroup from "../../../molecules/GenreCheckboxGroup";
 
 type QueryInput = {
   keyword?: string;
@@ -77,6 +78,7 @@ const Top = () => {
           検索
         </Button>
       </form>
+      <GenreCheckboxGroup />
       <div className={styles.rankingsCount}>
         <ContentOutline /> {rankingsCount}
       </div>
