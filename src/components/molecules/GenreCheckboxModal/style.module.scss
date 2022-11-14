@@ -9,4 +9,6 @@
   background-color: $white;
   padding: $space-xl $space-md;
   border-radius: $radius-md;
+  max-height: 600px;
+  overflow: scroll;
 }
