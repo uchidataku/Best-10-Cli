@@ -3,24 +3,3 @@
 .app {
   padding: $space-md $space-sm;
 }
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  background-color: $primary-color;
-  border-radius: 50px;
-  padding: $space-xs $space-sm;
-  margin-bottom: $space-md;
-
-  .logo {
-    color: $white;
-    margin-bottom: 0;
-    font-weight: bold;
-    font-size: $f-size-xl;
-  }
-
-  .menuIcon {
-    font-size: 30px;
-    color: $white;
-  }
-}

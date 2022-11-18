@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import PageRoutes from "./PageRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
 import styles from "./style.module.scss";
-import { MenuOutlined } from "@ant-design/icons";
 import SideDrawer from "../components/molecules/SideDrawer";
 import BackDrop from "../components/molecules/BackDrop";
-import routes from "../constants/routes";
 import axios from "../config/axios";
 import Api from "../config/qpi";
 import Account from "../models/Account";
+import Header from "../components/molecules/Header";
 
 function App() {
   const [account, setAccount] = useState<Account>();
@@ -43,12 +42,7 @@ function App() {
   return (
     <div>
       <div className={styles.app}>
-        <header className={styles.header}>
-          <a className={styles.logo} href={routes.top()}>
-            Best-10
-          </a>
-          <MenuOutlined className={styles.menuIcon} onClick={() => openSideDrawer()} />
-        </header>
+        <Header openSideDrawer={openSideDrawer}/>
         <main>
           <Router>
             <PageRoutes />
