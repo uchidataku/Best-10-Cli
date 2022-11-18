@@ -5,6 +5,9 @@ import classnames from "classnames";
 import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
 import Item from "../../../models/Item";
+import { notification } from "antd";
+import routes from "../../../constants/routes";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   rank: number;
@@ -13,6 +16,8 @@ type Props = {
 };
 
 const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
+  const navigate = useNavigate();
+
   function getDetailItemClassName() {
     if (rank < 11) {
       return styles.rankingDetailItem;
@@ -35,28 +40,50 @@ const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
   }
 
   async function onClickCreateLike(itemId: string) {
-    // TODO: currentAccountいなかったらできないように
     await axios
       .post(Api.createLike.buildPath(itemId))
       .then((res) => {
-        console.log(res.data);
         refetchData();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        if (err.response.status === 401) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+          navigate(routes.signIn());
+        } else if (err.response) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+        } else {
+          notification.error({
+            message: `${err.message}`,
+          });
+        }
       });
   }
 
   async function onClickDeleteLike(itemId: string) {
-    // TODO: currentAccountいなかったらできないように
     await axios
       .delete(Api.deleteLike.buildPath(itemId))
       .then((res) => {
-        console.log(res.data);
         refetchData();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        if (err.response.status === 401) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+          navigate(routes.signIn());
+        } else if (err.response) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+        } else {
+          notification.error({
+            message: `${err.message}`,
+          });
+        }
       });
   }
 

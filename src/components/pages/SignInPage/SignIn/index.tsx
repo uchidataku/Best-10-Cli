@@ -6,6 +6,7 @@ import { Form, Input, Button, Toast } from "antd-mobile";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import { useNavigate } from "react-router-dom";
 import routes from "../../../../constants/routes";
+import { notification } from "antd";
 
 const SignIn = () => {
   const [username, setUsername] = useState<string>("");
@@ -30,8 +31,16 @@ const SignIn = () => {
           content: "ログインしました",
         });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        if (err.response) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+        } else {
+          notification.error({
+            message: `${err.message}`,
+          });
+        }
       });
     return request;
   }

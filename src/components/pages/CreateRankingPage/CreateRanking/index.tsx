@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.scss";
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
@@ -35,8 +35,21 @@ const CreateRanking = () => {
           content: "Best-10を作成しました",
         });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        if (err.response.status === 401) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+          navigate(routes.signIn());
+        } else if (err.response) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+        } else {
+          notification.error({
+            message: `${err.message}`,
+          });
+        }
       });
   };
 

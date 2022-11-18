@@ -6,11 +6,13 @@ import RankingDetailItem from "../RankingDetailItem";
 import Account from "../../../models/Account";
 import Item from "../../../models/Item";
 import Ranking from "../../../models/Ranking";
-import { Button, Tag } from "antd";
+import { Button, notification, Tag } from "antd";
 import { useForm } from "react-hook-form";
 import { Toast } from "antd-mobile";
 import { DownOutline } from "antd-mobile-icons";
 import LoadMoreItems from "./loadMoreItems";
+import routes from "../../../constants/routes";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   rankingId: string;
@@ -27,6 +29,7 @@ const RankingDetail = ({ rankingId }: Props) => {
   const [otherItems, setOtherItems] = useState<Item[]>([]);
   const [loadMore, setloadMore] = useState(false);
   const { register, handleSubmit, reset } = useForm<FormInput>();
+  const navigate = useNavigate();
   const onSubmit = (data: FormInput) => {
     axios
       .post(Api.createRankingItem.buildPath(rankingId), {
@@ -41,8 +44,21 @@ const RankingDetail = ({ rankingId }: Props) => {
           content: "追加しました",
         });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        if (err.response.status === 401) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+          navigate(routes.signIn());
+        } else if (err.response) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+        } else {
+          notification.error({
+            message: `${err.message}`,
+          });
+        }
       });
   };
 
@@ -60,7 +76,7 @@ const RankingDetail = ({ rankingId }: Props) => {
   };
 
   let loadMoreItems;
-  if (loadMore == true) {
+  if (loadMore === true) {
     loadMoreItems = <LoadMoreItems items={otherItems} refetchData={refetchData} />;
   } else {
     loadMoreItems = (

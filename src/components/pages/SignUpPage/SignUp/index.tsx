@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
+import { notification } from "antd";
 import { Form, Input, Button, Toast } from "antd-mobile";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import styles from "./style.module.scss";
@@ -30,8 +31,16 @@ const SignUp = () => {
           content: "登録しました",
         });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        if (err.response) {
+          notification.error({
+            message: `${err.response.data.errors[0].description}`,
+          });
+        } else {
+          notification.error({
+            message: `${err.message}`,
+          });
+        }
       });
     return request;
   }
