@@ -1,5 +1,6 @@
 const routes = {
   top: (): string => "/",
+  about: (): string => "/about",
   signIn: (): string => "/sign_in",
   signUp: (): string => "/sign_up",
   ranking: (): string => "/rankings/:id",
