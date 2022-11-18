@@ -7,6 +7,9 @@ const NotLoginMenu = () => {
   return (
     <div className={styles.menu}>
       <div>
+        {/*<div className={styles.menuItem}>*/}
+        {/*  <a href={routes.about()}>Best-10とは</a>*/}
+        {/*</div>*/}
         <div className={styles.menuItem}>
           <a href={routes.signUp()}>新規登録</a>
         </div>

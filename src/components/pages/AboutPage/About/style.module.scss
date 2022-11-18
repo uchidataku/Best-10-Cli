@@ -1,1 +1,17 @@
 @import "src/assets/styles/modules";
+
+.about {
+  padding: 0 $space-sm;
+
+  .title {
+    font-size: $f-size-lg;
+    font-weight: bold;
+    margin-bottom: $space-xs;
+  }
+
+  .description {
+    p {
+      margin-bottom: $space-xs;
+    }
+  }
+}
