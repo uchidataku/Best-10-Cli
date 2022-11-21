@@ -12,9 +12,15 @@ import { GenreObjects, SortByObjects } from "../../../../models/Ranking/helpers"
 import GenreCheckboxModal from "../../../molecules/GenreCheckboxModal";
 import BackDrop from "../../../molecules/BackDrop";
 
+// type QueryInput = {
+//   keyword?: string;
+//   genre?: { value: string; label: string };
+//   sortBy?: { value: string; label: string };
+// };
+
 type QueryInput = {
   keyword?: string;
-  genre?: { value: string; label: string };
+  genreIds: string[];
   sortBy?: { value: string; label: string };
 };
 
@@ -26,18 +32,45 @@ const Top = () => {
   const closeSideDrawer = (): void => {
     setOpenGenreModal(false);
   };
-  const genreModal = openGenreModal ? <GenreCheckboxModal /> : "";
+  const setGenres = ({ ids }: {ids: string[]}): void => {
+    setGenreIds(ids);
+  }
+
+  const genreModal = openGenreModal ? <GenreCheckboxModal setGenres={setGenres}/> : "";
   const backdrop = openGenreModal ? <BackDrop closeSideDrawer={closeSideDrawer} /> : "";
 
-  const { handleSubmit, control } = useForm<QueryInput>();
+  const [keyword, setKeyword] = useState<string>();
+  const [genreIds, setGenreIds] = useState<string[]>([]);
+  const [sortBy, setSortBy] = useState("popularity");
 
-  const onSubmit = (data: QueryInput) => {
+  // const { handleSubmit, control } = useForm<QueryInput>();
+
+  // const onSubmit = (data: QueryInput) => {
+  //   axios
+  //     .get(Api.fetchRankings.buildPath(), {
+  //       params: {
+  //         keyword: data?.keyword,
+  //         genre: data?.genre?.value,
+  //         sortBy: data?.sortBy?.value ? data.sortBy.value : defaultSortByParams.value,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setRankings(res.data.rankings);
+  //       setRankingsCount(res.data.totalDataNums);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  const onSubmit = () => {
     axios
       .get(Api.fetchRankings.buildPath(), {
         params: {
-          keyword: data?.keyword,
-          genre: data?.genre?.value,
-          sortBy: data?.sortBy?.value ? data.sortBy.value : defaultSortByParams.value,
+          keyword: keyword,
+          genreIds: genreIds,
+          sortBy: sortBy,
         },
       })
       .then((res) => {
@@ -72,17 +105,28 @@ const Top = () => {
     fetchData();
   }, []);
 
+  console.log(keyword);
+  console.log(genreIds);
+  console.log(sortBy);
+
   return (
     <div>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <Controller name="keyword" control={control} render={({ field: { onChange, value } }) => <input className={styles.searchBar} value={value} placeholder="キーワード" onChange={onChange} />} />
-        <Controller name="genre" control={control} render={({ field }) => <Select {...field} className={styles.genreInput} placeholder="ジャンル" options={GenreObjects} />} />
-        <Controller name="sortBy" control={control} render={({ field }) => <Select {...field} className={styles.sortByInput} defaultValue={defaultSortByParams} options={SortByObjects} />} />
-        <Button className={styles.searchButton} onClick={handleSubmit(onSubmit)}>
+      {/*<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>*/}
+      {/*  <Controller name="keyword" control={control} render={({ field: { onChange, value } }) => <input className={styles.searchBar} value={value} placeholder="キーワード" onChange={onChange} />} />*/}
+      {/*  <Controller name="genre" control={control} render={({ field }) => <Select {...field} className={styles.genreInput} placeholder="ジャンル" options={GenreObjects} />} />*/}
+      {/*  <Controller name="sortBy" control={control} render={({ field }) => <Select {...field} className={styles.sortByInput} defaultValue={defaultSortByParams} options={SortByObjects} />} />*/}
+      {/*  <Button className={styles.searchButton} onClick={handleSubmit(onSubmit)}>*/}
+      {/*    検索*/}
+      {/*  </Button>*/}
+      {/*</form>*/}
+      <div className={styles.form}>
+        <input className={styles.searchBar} onChange={(e) => setKeyword(e.target.value)} value={keyword} type="text" placeholder="キーワード" />
+        <div className={styles.genreInput} onClick={() => setOpenGenreModal(true)}><p>ジャンル</p></div>
+        <Select className={styles.sortByInput} onChange={(e) => e !== null ? setSortBy(e.value) : null} defaultValue={defaultSortByParams} options={SortByObjects} />
+        <Button className={styles.searchButton} onClick={() => onSubmit()}>
           検索
         </Button>
-      </form>
-      <button onClick={() => setOpenGenreModal(true)}>genre</button>
+      </div>
       {genreModal}
       {backdrop}
       <div className={styles.rankingsCount}>

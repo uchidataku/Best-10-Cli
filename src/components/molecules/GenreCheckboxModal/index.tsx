@@ -5,8 +5,20 @@ import Api from "../../../config/qpi";
 import GenreCategory from "../../../models/GenreCategory";
 import GenreCheckboxGroup from "./GenreCheckboxGroup";
 
-const GenreCheckboxModal = () => {
+type Props = {
+  setGenres: ({ ids }: {ids: string[]}) => void,
+}
+
+const GenreCheckboxModal = ({ setGenres }: Props) => {
   const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
+  const [checkedValues, setCheckedValues] = useState<string[]>([]);
+
+  const checkValues = ({ values }: { values: string[] }): void => {
+    setCheckedValues([...checkedValues, ...values]);
+    setGenres({ ids: checkedValues});
+  }
+
+  setGenres({ ids: checkedValues});
 
   async function fetchData() {
     const request = await axios
@@ -27,7 +39,7 @@ const GenreCheckboxModal = () => {
   return (
     <div className={styles.genreCheckboxModal}>
       {genreCategories.map((genreCategory, idx) => (
-        <GenreCheckboxGroup key={idx} genreCategory={genreCategory} />
+        <GenreCheckboxGroup key={idx} genreCategory={genreCategory} checkValues={checkValues} />
       ))}
     </div>
   );

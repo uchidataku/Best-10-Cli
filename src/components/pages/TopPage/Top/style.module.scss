@@ -11,11 +11,11 @@
   }
 
   .genreInput {
-    border-width: 0.9px;
+    border: 1px solid $support-color;
     border-radius: $radius-sm;
-    border-color: $support-color;
     margin-bottom: $space-xs;
     width: 100%;
+    padding: $space-xs $space-xs;
   }
 
   .sortByInput {
