@@ -6,19 +6,19 @@ import GenreCategory from "../../../models/GenreCategory";
 import GenreCheckboxGroup from "./GenreCheckboxGroup";
 
 type Props = {
-  collectGenreIds: ({ ids }: {ids: string[]}) => void,
-}
+  onCheck: ({ ids }: { ids: string[] }) => void;
+  isOpen: boolean;
+};
 
-const GenreCheckboxModal = ({ collectGenreIds }: Props) => {
+const GenreCheckboxModal = ({ onCheck, isOpen }: Props) => {
   const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
+  console.log(checkedValues);
 
-  const checkValues = ({ values }: { values: string[] }): void => {
+  const onCheckValues = ({ values }: { values: string[] }): void => {
     setCheckedValues([...checkedValues, ...values]);
-    collectGenreIds({ ids: checkedValues});
-  }
-
-  collectGenreIds({ ids: checkedValues});
+    onCheck({ ids: checkedValues });
+  };
 
   async function fetchData() {
     const request = await axios
@@ -36,12 +36,14 @@ const GenreCheckboxModal = ({ collectGenreIds }: Props) => {
     fetchData();
   }, []);
 
-  return (
+  return isOpen ? (
     <div className={styles.genreCheckboxModal}>
       {genreCategories.map((genreCategory, idx) => (
-        <GenreCheckboxGroup key={idx} genreCategory={genreCategory} checkValues={checkValues} />
+        <GenreCheckboxGroup key={idx} defaultValues={checkedValues} genreCategory={genreCategory} onCheckValues={onCheckValues} />
       ))}
     </div>
+  ) : (
+    <div />
   );
 };
 

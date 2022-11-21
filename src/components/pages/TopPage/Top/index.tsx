@@ -32,11 +32,10 @@ const Top = () => {
   const closeSideDrawer = (): void => {
     setOpenGenreModal(false);
   };
-  const collectGenreIds = ({ ids }: {ids: string[]}): void => {
+  const collectGenreIds = ({ ids }: { ids: string[] }): void => {
     setGenreIds(ids);
-  }
+  };
 
-  const genreModal = openGenreModal ? <GenreCheckboxModal collectGenreIds={collectGenreIds}/> : "";
   const backdrop = openGenreModal ? <BackDrop closeSideDrawer={closeSideDrawer} /> : "";
 
   const [keyword, setKeyword] = useState<string>();
@@ -105,10 +104,6 @@ const Top = () => {
     fetchData();
   }, []);
 
-  console.log(keyword);
-  console.log(genreIds);
-  console.log(sortBy);
-
   return (
     <div>
       {/*<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>*/}
@@ -121,13 +116,15 @@ const Top = () => {
       {/*</form>*/}
       <div className={styles.form}>
         <input className={styles.searchBar} onChange={(e) => setKeyword(e.target.value)} value={keyword} type="text" placeholder="キーワード" />
-        <div className={styles.genreInput} onClick={() => setOpenGenreModal(true)}><p>ジャンル</p></div>
-        <Select className={styles.sortByInput} onChange={(e) => e !== null ? setSortBy(e.value) : null} defaultValue={defaultSortByParams} options={SortByObjects} />
+        <div className={styles.genreInput} onClick={() => setOpenGenreModal(true)}>
+          <p>ジャンル</p>
+        </div>
+        <Select className={styles.sortByInput} onChange={(e) => (e !== null ? setSortBy(e.value) : null)} defaultValue={defaultSortByParams} options={SortByObjects} />
         <Button className={styles.searchButton} onClick={() => onSubmit()}>
           検索
         </Button>
       </div>
-      {genreModal}
+      <GenreCheckboxModal onCheck={collectGenreIds} isOpen={openGenreModal} />
       {backdrop}
       <div className={styles.rankingsCount}>
         <ContentOutline /> {rankingsCount}
