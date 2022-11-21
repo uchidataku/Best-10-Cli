@@ -36,8 +36,6 @@ const Top = () => {
     setGenreIds(ids);
   };
 
-  const backdrop = openGenreModal ? <BackDrop closeSideDrawer={closeSideDrawer} /> : "";
-
   const [keyword, setKeyword] = useState<string>();
   const [genreIds, setGenreIds] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("popularity");
@@ -125,7 +123,7 @@ const Top = () => {
         </Button>
       </div>
       <GenreCheckboxModal onCheck={collectGenreIds} isOpen={openGenreModal} />
-      {backdrop}
+      {openGenreModal && <BackDrop closeSideDrawer={closeSideDrawer} />}
       <div className={styles.rankingsCount}>
         <ContentOutline /> {rankingsCount}
       </div>

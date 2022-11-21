@@ -25,28 +25,22 @@ const GenreCheckboxGroup = ({ defaultValues, genreCategory, onCheckValues }: Pro
     const values: string[] = [];
     setCheckedValues(checkedValues);
     checkedValues.map((value) => values.push(value as string));
-    console.log("checkedValues");
-    console.log(checkedValues);
 
     onCheckValues({ values: values });
   };
 
   genreCategory.genres.map((genre) => genres.push({ label: genre.name, value: genre.id }));
 
-  const menus = open ? (
-    <div className={styles.checkbox}>
-      <Checkbox.Group defaultValue={checkedValues} onChange={onChange} options={genres} />
-    </div>
-  ) : (
-    ""
-  );
-
   return (
     <div className={styles.genreCheckboxGroup}>
       <div className={styles.dropDownLabel} onClick={() => setOpen(!open)}>
         {icon} {genreCategory.name}
       </div>
-      {menus}
+      {
+        open && <div className={styles.checkbox}>
+          <Checkbox.Group defaultValue={checkedValues} onChange={onChange} options={genres} />
+        </div>
+      }
     </div>
   );
 };
