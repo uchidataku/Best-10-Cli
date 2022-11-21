@@ -32,11 +32,11 @@ const Top = () => {
   const closeSideDrawer = (): void => {
     setOpenGenreModal(false);
   };
-  const setGenres = ({ ids }: {ids: string[]}): void => {
+  const collectGenreIds = ({ ids }: {ids: string[]}): void => {
     setGenreIds(ids);
   }
 
-  const genreModal = openGenreModal ? <GenreCheckboxModal setGenres={setGenres}/> : "";
+  const genreModal = openGenreModal ? <GenreCheckboxModal collectGenreIds={collectGenreIds}/> : "";
   const backdrop = openGenreModal ? <BackDrop closeSideDrawer={closeSideDrawer} /> : "";
 
   const [keyword, setKeyword] = useState<string>();

@@ -6,19 +6,19 @@ import GenreCategory from "../../../models/GenreCategory";
 import GenreCheckboxGroup from "./GenreCheckboxGroup";
 
 type Props = {
-  setGenres: ({ ids }: {ids: string[]}) => void,
+  collectGenreIds: ({ ids }: {ids: string[]}) => void,
 }
 
-const GenreCheckboxModal = ({ setGenres }: Props) => {
+const GenreCheckboxModal = ({ collectGenreIds }: Props) => {
   const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
 
   const checkValues = ({ values }: { values: string[] }): void => {
     setCheckedValues([...checkedValues, ...values]);
-    setGenres({ ids: checkedValues});
+    collectGenreIds({ ids: checkedValues});
   }
 
-  setGenres({ ids: checkedValues});
+  collectGenreIds({ ids: checkedValues});
 
   async function fetchData() {
     const request = await axios
