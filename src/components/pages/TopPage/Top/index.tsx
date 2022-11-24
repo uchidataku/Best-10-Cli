@@ -32,7 +32,7 @@ const Top = () => {
   const closeSideDrawer = (): void => {
     setOpenGenreModal(false);
   };
-  const collectGenreIds = ({ ids }: { ids: string[] }): void => {
+  const onCheckGenreIds = ({ ids }: { ids: string[] }): void => {
     setGenreIds(ids);
   };
 
@@ -122,7 +122,7 @@ const Top = () => {
           検索
         </Button>
       </div>
-      <GenreCheckboxModal onCheck={collectGenreIds} isOpen={openGenreModal} />
+      <GenreCheckboxModal onCheck={onCheckGenreIds} isOpen={openGenreModal} />
       {openGenreModal && <BackDrop closeSideDrawer={closeSideDrawer} />}
       <div className={styles.rankingsCount}>
         <ContentOutline /> {rankingsCount}
