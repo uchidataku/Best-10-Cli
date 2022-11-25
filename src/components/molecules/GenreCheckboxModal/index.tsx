@@ -13,11 +13,10 @@ type Props = {
 const GenreCheckboxModal = ({ onCheck, isOpen }: Props) => {
   const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
-  console.log(checkedValues);
 
   const onCheckValues = ({ values }: { values: string[] }): void => {
-    setCheckedValues([...checkedValues, ...values]);
-    onCheck({ ids: checkedValues });
+    setCheckedValues(values);
+    onCheck({ ids: values });
   };
 
   async function fetchData() {
