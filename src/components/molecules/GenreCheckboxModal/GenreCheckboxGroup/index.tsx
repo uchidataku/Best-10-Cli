@@ -6,9 +6,7 @@ import GenreCategory from "../../../../models/GenreCategory";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 
 type Props = {
-  defaultValues?: string[];
   genreCategory: GenreCategory;
-  onCheckValues: ({ values }: { values: string[] }) => void;
 };
 
 interface GenreOption {
@@ -16,13 +14,13 @@ interface GenreOption {
   value: string;
 }
 
-const GenreCheckboxGroup = ({ defaultValues, genreCategory, onCheckValues }: Props) => {
-  const [checkedValues, setCheckedValues] = useState<CheckboxValueType[]>(defaultValues ?? []);
+const GenreCheckboxGroup = ({ genreCategory }: Props) => {
+  const [checkedValues, setCheckedValues] = useState<CheckboxValueType[]>([]);
   const [open, setOpen] = useState(false);
   const genres: GenreOption[] = [];
   const onChange = (checkedValues: CheckboxValueType[]) => {
     setCheckedValues(checkedValues);
-    onCheckValues({ values: checkedValues.map((checkedValue) => checkedValue.toString()) });
+    // onCheckValues({ values: checkedValues.map((checkedValue) => checkedValue.toString()) });
   };
 
   genreCategory.genres.map((genre) => genres.push({ label: genre.name, value: genre.id }));
@@ -35,7 +33,11 @@ const GenreCheckboxGroup = ({ defaultValues, genreCategory, onCheckValues }: Pro
       </div>
       {open && (
         <div className={styles.checkbox}>
-          <Checkbox.Group defaultValue={checkedValues} onChange={onChange} options={genres} />
+          {genres.map((genre) => (
+            <Checkbox key={genre.value} value={genre.value}>
+              {genre.label}
+            </Checkbox>
+          ))}
         </div>
       )}
     </div>

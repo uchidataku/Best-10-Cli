@@ -4,6 +4,7 @@ import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
 import GenreCategory from "../../../models/GenreCategory";
 import GenreCheckboxGroup from "./GenreCheckboxGroup";
+import { Checkbox } from "antd";
 
 type Props = {
   onCheck: ({ ids }: { ids: string[] }) => void;
@@ -14,7 +15,7 @@ const GenreCheckboxModal = ({ onCheck, isOpen }: Props) => {
   const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
 
-  const onCheckValues = ({ values }: { values: string[] }): void => {
+  const onCheckValues = (values: string[]): void => {
     setCheckedValues(values);
     onCheck({ ids: values });
   };
@@ -37,9 +38,11 @@ const GenreCheckboxModal = ({ onCheck, isOpen }: Props) => {
 
   return isOpen ? (
     <div className={styles.genreCheckboxModal}>
-      {genreCategories.map((genreCategory, idx) => (
-        <GenreCheckboxGroup key={idx} defaultValues={checkedValues} genreCategory={genreCategory} onCheckValues={onCheckValues} />
-      ))}
+      <Checkbox.Group defaultValue={checkedValues} onChange={(checkedValues) => onCheckValues(checkedValues as string[])}>
+        {genreCategories.map((genreCategory) => (
+          <GenreCheckboxGroup key={genreCategory.id} genreCategory={genreCategory} />
+        ))}
+      </Checkbox.Group>
     </div>
   ) : (
     <div />
