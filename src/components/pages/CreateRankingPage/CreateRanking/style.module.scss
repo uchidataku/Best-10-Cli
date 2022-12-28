@@ -36,13 +36,27 @@
         margin-bottom: $space-xs;
       }
 
+      //.genreInput {
+      //  border-width: 0.9px;
+      //  border-radius: $radius-sm;
+      //  border-color: $support-color;
+      //  margin-right: $space-xs;
+      //  width: 100%;
+      //  height: $size-xl;
+      //}
+
       .genreInput {
-        border-width: 0.9px;
+        border: 1px solid $support-color;
         border-radius: $radius-sm;
-        border-color: $support-color;
-        margin-right: $space-xs;
+        margin-bottom: $space-xs;
         width: 100%;
-        height: $size-xl;
+        padding: $space-xs $space-xs;
+
+        &.active {
+          color: $primary-color;
+          font-weight: bold;
+          border: 1px solid $primary-color;
+        }
       }
 
       .genreOption {

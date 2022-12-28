@@ -1,34 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.scss";
 import { Button, notification } from "antd";
-import { useForm, Controller } from "react-hook-form";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
 import routes from "../../../../constants/routes";
 import { Toast } from "antd-mobile";
-import { GenreObjects } from "../../../../models/Ranking/helpers";
 import { useNavigate } from "react-router-dom";
-import Select from "react-select";
-
-type FormInput = {
-  title: string;
-  genre: { value: string; label: string };
-};
+import classNames from "classnames";
+import GenreCheckboxModal from "../../../molecules/GenreCheckboxModal";
+import BackDrop from "../../../molecules/BackDrop";
 
 const CreateRanking = () => {
-  const { control, handleSubmit } = useForm<FormInput>();
   const navigate = useNavigate();
+  const [openGenreModal, setOpenGenreModal] = useState(false);
+  const [title, setTitle] = useState<string>();
+  const [genreIds, setGenreIds] = useState<string[]>([]);
+  const closeSideDrawer = (): void => {
+    setOpenGenreModal(false);
+  };
+  const onCheckGenreIds = ({ ids }: { ids: string[] }): void => {
+    setGenreIds(ids);
+  };
 
-  const onSubmit = (data: FormInput) => {
+  const onSubmit = () => {
     axios
       .post(Api.createRanking.buildPath(), {
         ranking: {
-          title: data.title,
-          genre: data.genre.value,
+          title: title,
+          genreIds: genreIds,
         },
       })
       .then((res) => {
-        console.log(res.data);
         navigate(routes.top());
         Toast.show({
           icon: "success",
@@ -58,31 +60,23 @@ const CreateRanking = () => {
       <div className={styles.pageTitle}>
         <h2>Best-10を作成する</h2>
       </div>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="title"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <div className={styles.title}>
-              <p className={styles.titleLabel}>タイトル</p>
-              <input className={styles.titleInput} value={value} placeholder="タイトル" onChange={onChange} />
-            </div>
-          )}
-        />
-        <Controller
-          name="genre"
-          control={control}
-          render={({ field }) => (
-            <div className={styles.genre}>
-              <p className={styles.genreLabel}>ジャンル</p>
-              <Select {...field} className={styles.genreInput} placeholder="ジャンル" options={GenreObjects} />
-            </div>
-          )}
-        />
-        <Button className={styles.createButton} onClick={handleSubmit(onSubmit)}>
+      <div className={styles.form}>
+        <div className={styles.title}>
+          <p className={styles.titleLabel}>タイトル</p>
+          <input className={styles.titleInput} onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder="タイトル" />
+        </div>
+        <div className={styles.genre}>
+          <p className={styles.genreLabel}>ジャンル</p>
+          <div className={classNames(styles.genreInput, { [styles.active]: genreIds.length })} onClick={() => setOpenGenreModal(true)}>
+            <p>ジャンル{genreIds.length > 0 && " ・ " + genreIds.length}</p>
+          </div>
+        </div>
+        <Button className={styles.createButton} onClick={() => onSubmit()}>
           作成する
         </Button>
-      </form>
+      </div>
+      <GenreCheckboxModal onCheck={onCheckGenreIds} isOpen={openGenreModal} />
+      {openGenreModal && <BackDrop closeSideDrawer={closeSideDrawer} />}
     </div>
   );
 };
