@@ -6,12 +6,12 @@ import GenreCategory from "../../../models/GenreCategory";
 import GenreCheckboxGroup from "./GenreCheckboxGroup";
 import { Checkbox } from "antd";
 
-type Props = {
+type GenreCheckboxModalProps = {
   onCheck: ({ ids }: { ids: string[] }) => void;
   isOpen: boolean;
 };
 
-const GenreCheckboxModal = ({ onCheck, isOpen }: Props) => {
+const GenreCheckboxModal = ({ onCheck, isOpen }: GenreCheckboxModalProps) => {
   const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
 

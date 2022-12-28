@@ -3,9 +3,9 @@ import styles from "./style.module.scss";
 import { Checkbox } from "antd";
 import { RightOutline, DownOutline } from "antd-mobile-icons";
 import GenreCategory from "../../../../models/GenreCategory";
-import { CheckboxValueType } from "antd/es/checkbox/Group";
+// import { CheckboxValueType } from "antd/es/checkbox/Group";
 
-type Props = {
+type GenreCheckboxGroupProps = {
   genreCategory: GenreCategory;
 };
 
@@ -14,14 +14,14 @@ interface GenreOption {
   value: string;
 }
 
-const GenreCheckboxGroup = ({ genreCategory }: Props) => {
-  const [checkedValues, setCheckedValues] = useState<CheckboxValueType[]>([]);
+const GenreCheckboxGroup = ({ genreCategory }: GenreCheckboxGroupProps) => {
+  // const [checkedValues, setCheckedValues] = useState<CheckboxValueType[]>([]);
   const [open, setOpen] = useState(false);
   const genres: GenreOption[] = [];
-  const onChange = (checkedValues: CheckboxValueType[]) => {
-    setCheckedValues(checkedValues);
-    // onCheckValues({ values: checkedValues.map((checkedValue) => checkedValue.toString()) });
-  };
+  // const onChange = (checkedValues: CheckboxValueType[]) => {
+  //   setCheckedValues(checkedValues);
+  //   // onCheckValues({ values: checkedValues.map((checkedValue) => checkedValue.toString()) });
+  // };
 
   genreCategory.genres.map((genre) => genres.push({ label: genre.name, value: genre.id }));
 

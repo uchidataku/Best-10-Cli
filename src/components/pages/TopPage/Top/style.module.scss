@@ -16,6 +16,12 @@
     margin-bottom: $space-xs;
     width: 100%;
     padding: $space-xs $space-xs;
+
+    &.active {
+      color: $primary-color;
+      font-weight: bold;
+      border: 1px solid $primary-color;
+    }
   }
 
   .sortByInput {
