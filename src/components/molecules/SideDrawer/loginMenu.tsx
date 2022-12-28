@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style.module.scss";
 import routes from "../../../constants/routes";
-import { FillinOutline, InformationCircleOutline } from "antd-mobile-icons";
+import { FillinOutline } from "antd-mobile-icons";
 import { InstagramOutlined, TwitterOutlined } from "@ant-design/icons";
 
 const LoginMenu = () => {

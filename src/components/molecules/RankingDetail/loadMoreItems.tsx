@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./style.module.scss";
 import Item from "../../../models/Item";
 import RankingDetailItem from "../RankingDetailItem";
 
