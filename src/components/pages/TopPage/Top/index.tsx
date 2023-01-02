@@ -38,7 +38,6 @@ const Top = () => {
 
   const [keyword, setKeyword] = useState<string>();
   const [genreIds, setGenreIds] = useState<string[]>([]);
-  console.log("genreIds", genreIds);
   const [sortBy, setSortBy] = useState("popularity");
 
   // const { handleSubmit, control } = useForm<QueryInput>();
@@ -89,7 +88,6 @@ const Top = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setRankings(res.data.rankings);
         setRankingsCount(res.data.totalDataNums);
       })
