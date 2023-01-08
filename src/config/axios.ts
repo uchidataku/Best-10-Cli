@@ -3,7 +3,7 @@ import { camelizeKeys, decamelizeKeys } from "humps";
 
 const token = localStorage.getItem("AUTH_TOKEN");
 const client = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://api.best-10.co.in",
 });
 
 if (token) {
