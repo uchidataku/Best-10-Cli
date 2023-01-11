@@ -43,9 +43,9 @@ function App() {
   return (
     <div>
       <div className={styles.app}>
-        <Header openSideDrawer={openSideDrawer}/>
         <main>
           <Router>
+            <Header openSideDrawer={openSideDrawer}/>
             <PageRoutes />
           </Router>
         </main>

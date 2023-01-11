@@ -15,8 +15,16 @@
     font-size: $f-size-xl;
   }
 
-  .menuIcon {
-    font-size: 30px;
-    color: $white;
+  .icons {
+    .searchIcon {
+      font-size: 22px;
+      color: $white;
+      margin-right: $space-md;
+    }
+
+    .menuIcon {
+      font-size: 30px;
+      color: $white;
+    }
   }
 }
