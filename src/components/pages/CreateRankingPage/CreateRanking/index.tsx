@@ -63,11 +63,20 @@ const CreateRanking = () => {
       <div className={styles.form}>
         <div className={styles.title}>
           <p className={styles.titleLabel}>タイトル</p>
-          <input className={styles.titleInput} onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder="タイトル" />
+          <input
+            className={styles.titleInput}
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            type="text"
+            placeholder="タイトル"
+          />
         </div>
         <div className={styles.genre}>
           <p className={styles.genreLabel}>ジャンル</p>
-          <div className={classNames(styles.genreInput, { [styles.active]: genreIds.length })} onClick={() => setOpenGenreModal(true)}>
+          <div
+            className={classNames(styles.genreInput, { [styles.active]: genreIds.length })}
+            onClick={() => setOpenGenreModal(true)}
+          >
             <p>ジャンル{genreIds.length > 0 && " ・ " + genreIds.length}</p>
           </div>
         </div>

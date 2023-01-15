@@ -9,7 +9,7 @@ const Search = () => {
   const onSubmit = () => {
     axios
       .get(Api.fetchRankings.buildPath(), {
-        params: { keyword: keyword }
+        params: { keyword: keyword },
       })
       .then((res) => {
         console.log(res.data);
@@ -23,8 +23,13 @@ const Search = () => {
 
   return (
     <div className={styles.search}>
-      <input className={styles.searchBar} onChange={(e) => setKeyword(e.target.value)} value={keyword} type="text"
-             placeholder="キーワード" />
+      <input
+        className={styles.searchBar}
+        onChange={(e) => setKeyword(e.target.value)}
+        value={keyword}
+        type="text"
+        placeholder="キーワード"
+      />
       <Button className={styles.searchButton} onClick={() => onSubmit()}>
         検索
       </Button>

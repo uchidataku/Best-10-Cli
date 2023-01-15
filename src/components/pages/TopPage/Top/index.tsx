@@ -104,20 +104,27 @@ const Top = () => {
 
   return (
     <div>
-      {/*<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>*/}
-      {/*  <Controller name="keyword" control={control} render={({ field: { onChange, value } }) => <input className={styles.searchBar} value={value} placeholder="キーワード" onChange={onChange} />} />*/}
-      {/*  <Controller name="genre" control={control} render={({ field }) => <Select {...field} className={styles.genreInput} placeholder="ジャンル" options={GenreObjects} />} />*/}
-      {/*  <Controller name="sortBy" control={control} render={({ field }) => <Select {...field} className={styles.sortByInput} defaultValue={defaultSortByParams} options={SortByObjects} />} />*/}
-      {/*  <Button className={styles.searchButton} onClick={handleSubmit(onSubmit)}>*/}
-      {/*    検索*/}
-      {/*  </Button>*/}
-      {/*</form>*/}
       <div className={styles.form}>
-        <input className={styles.searchBar} onChange={(e) => setKeyword(e.target.value)} value={keyword} type="text" placeholder="キーワード" />
-        <div className={classNames(styles.genreInput, { [styles.active]: genreIds.length })} onClick={() => setOpenGenreModal(true)}>
+        <input
+          className={styles.searchBar}
+          onChange={(e) => setKeyword(e.target.value)}
+          value={keyword}
+          type="text"
+          placeholder="キーワード"
+        />
+        <div
+          className={classNames(styles.genreInput, { [styles.active]: genreIds.length })}
+          onClick={() => setOpenGenreModal(true)}
+        >
           <p>ジャンル{genreIds.length > 0 && " ・ " + genreIds.length}</p>
         </div>
-        <Select className={styles.sortByInput} onChange={(e) => (e !== null ? setSortBy(e.value) : null)} defaultValue={defaultSortByParams} options={SortByObjects} />
+
+        <Select
+          className={styles.sortByInput}
+          onChange={(e) => (e !== null ? setSortBy(e.value) : null)}
+          defaultValue={defaultSortByParams}
+          options={SortByObjects}
+        />
         <Button className={styles.searchButton} onClick={() => onSubmit()}>
           検索
         </Button>

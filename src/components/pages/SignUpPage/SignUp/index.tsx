@@ -58,16 +58,33 @@ const SignUp = () => {
           </Button>
         }
       >
-        <Form.Item name="username" label="ユーザーネーム" rules={[{ required: true, message: "ユーザーネームを入力してください" }]}>
+        <Form.Item
+          name="username"
+          label="ユーザーネーム"
+          rules={[{ required: true, message: "ユーザーネームを入力してください" }]}
+        >
           <Input value={username} onChange={(value) => setUsername(value)} placeholder="Username" />
         </Form.Item>
         <Form.Item
           name="password"
           label="パスワード"
           rules={[{ required: true, message: "パスワードを入力してください" }]}
-          extra={<div className={styles.eye}>{!visible ? <EyeInvisibleOutline onClick={() => setVisible(true)} /> : <EyeOutline onClick={() => setVisible(false)} />}</div>}
+          extra={
+            <div className={styles.eye}>
+              {!visible ? (
+                <EyeInvisibleOutline onClick={() => setVisible(true)} />
+              ) : (
+                <EyeOutline onClick={() => setVisible(false)} />
+              )}
+            </div>
+          }
         >
-          <Input value={password} type={visible ? "text" : "password"} onChange={(value) => setPassword(value)} placeholder="Password" />
+          <Input
+            value={password}
+            type={visible ? "text" : "password"}
+            onChange={(value) => setPassword(value)}
+            placeholder="Password"
+          />
         </Form.Item>
       </Form>
     </div>
