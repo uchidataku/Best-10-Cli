@@ -1,44 +1,21 @@
 @import "src/assets/styles/modules";
 
 .form {
-  .searchBar {
-    border-width: 0.9px;
-    border-radius: $radius-sm;
-    border-color: $support-color;
-    margin-bottom: $space-xs;
-    width: 100%;
-    height: $size-xxl;
-  }
-
-  .genreInput {
-    border: 1px solid $support-color;
-    border-radius: $radius-sm;
-    margin-bottom: $space-xs;
-    width: 100%;
-    padding: $space-xs $space-xs;
-
-    &.active {
-      color: $primary-color;
-      font-weight: bold;
-      border: 1px solid $primary-color;
-    }
-  }
-
   .sortByInput {
-    border-width: 0.9px;
+    border-width: 0.8px;
     border-radius: $radius-sm;
     border-color: $support-color;
     margin-bottom: $space-xs;
     width: 100%;
   }
 
-  .searchButton {
-    width: 100%;
-    background-color: $secondary-color;
-    color: $white;
-    font-weight: bold;
-    border-radius: $radius-sm;
-  }
+  //.searchButton {
+  //  width: 100%;
+  //  background-color: $secondary-color;
+  //  color: $white;
+  //  font-weight: bold;
+  //  border-radius: $radius-sm;
+  //}
 }
 
 .rankingsCount {
