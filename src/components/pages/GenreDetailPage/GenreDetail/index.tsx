@@ -6,9 +6,9 @@ import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
 import { SortByObjects } from "../../../../models/Ranking/helpers";
 import { useLocation } from "react-router-dom";
-import Select from "react-select";
 import { ContentOutline } from "antd-mobile-icons";
 import Genre from "../../../../models/Genre";
+import { Radio } from "antd";
 
 const GenreDetail = () => {
   const location = useLocation();
@@ -75,14 +75,18 @@ const GenreDetail = () => {
   return (
     <div className={styles.genreDetail}>
       <p className={styles.genreTitle}>{genre?.name}</p>
-      <Select
-        className={styles.sortByInput}
-        onChange={(e) => (e !== null ? onSubmit(e.value) : null)}
-        defaultValue={defaultSortByParams}
-        options={SortByObjects}
-      />
-      <div className={styles.rankingsCount}>
-        <ContentOutline /> {rankingsCount}
+      <div className={styles.listInfo}>
+        <div className={styles.rankingsCount}>
+          <ContentOutline /> {rankingsCount}
+        </div>
+        <Radio.Group
+          size="small"
+          onChange={(e) => (e !== null ? onSubmit(e.target.value) : null)}
+          defaultValue={SortByObjects[0].value}
+        >
+          <Radio.Button value={SortByObjects[0].value}>人気順</Radio.Button>
+          <Radio.Button value={SortByObjects[1].value}>新着順</Radio.Button>
+        </Radio.Group>
       </div>
       <RankingList rankings={rankings} />
     </div>

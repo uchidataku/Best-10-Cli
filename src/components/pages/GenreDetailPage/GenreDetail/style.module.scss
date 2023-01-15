@@ -6,7 +6,13 @@
   margin: $space-sm 0;
 }
 
-.rankingsCount {
-  text-align: right;
-  margin: $space-xs 0;
+.listInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .rankingsCount {
+    text-align: right;
+    margin: $space-xs 0;
+  }
 }

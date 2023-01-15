@@ -4,8 +4,8 @@ import styles from "./style.module.scss";
 import Ranking from "../../../../models/Ranking";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
+import { Radio } from "antd";
 import { ContentOutline } from "antd-mobile-icons";
-import Select from "react-select";
 import { SortByObjects } from "../../../../models/Ranking/helpers";
 
 const Top = () => {
@@ -54,16 +54,18 @@ const Top = () => {
 
   return (
     <div>
-      <div className={styles.form}>
-        <Select
-          className={styles.sortByInput}
-          onChange={(e) => (e !== null ? onSubmit(e.value) : null)}
-          defaultValue={defaultSortByParams}
-          options={SortByObjects}
-        />
-      </div>
-      <div className={styles.rankingsCount}>
-        <ContentOutline /> {rankingsCount}
+      <div className={styles.listInfo}>
+        <div className={styles.rankingsCount}>
+          <ContentOutline /> {rankingsCount}
+        </div>
+        <Radio.Group
+          size="small"
+          onChange={(e) => (e !== null ? onSubmit(e.target.value) : null)}
+          defaultValue={SortByObjects[0].value}
+        >
+          <Radio.Button value={SortByObjects[0].value}>人気順</Radio.Button>
+          <Radio.Button value={SortByObjects[1].value}>新着順</Radio.Button>
+        </Radio.Group>
       </div>
       <RankingList rankings={rankings} />
     </div>
