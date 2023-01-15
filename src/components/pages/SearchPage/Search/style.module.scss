@@ -4,15 +4,13 @@
   border-width: 0.9px;
   border-radius: $radius-sm;
   border-color: $support-color;
-  margin-bottom: $space-xs;
+  margin-bottom: $space-sm;
   width: 100%;
   height: $size-xxl;
 }
 
-.searchButton {
-  width: 100%;
-  background-color: $secondary-color;
-  color: $white;
+.genreLabel {
   font-weight: bold;
-  border-radius: $radius-sm;
+  margin-bottom: $space-xs;
 }
+

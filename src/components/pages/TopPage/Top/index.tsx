@@ -40,27 +40,6 @@ const Top = () => {
   const [genreIds, setGenreIds] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("popularity");
 
-  // const { handleSubmit, control } = useForm<QueryInput>();
-
-  // const onSubmit = (data: QueryInput) => {
-  //   axios
-  //     .get(Api.fetchRankings.buildPath(), {
-  //       params: {
-  //         keyword: data?.keyword,
-  //         genre: data?.genre?.value,
-  //         sortBy: data?.sortBy?.value ? data.sortBy.value : defaultSortByParams.value,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setRankings(res.data.rankings);
-  //       setRankingsCount(res.data.totalDataNums);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
   const onSubmit = () => {
     axios
       .get(Api.fetchRankings.buildPath(), {

@@ -6,11 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 type Props = {
   openSideDrawer: () => void;
-}
+};
 
 const Header = ({ openSideDrawer }: Props) => {
   const navigate = useNavigate();
-
 
   return (
     <header className={styles.header}>
@@ -18,7 +17,7 @@ const Header = ({ openSideDrawer }: Props) => {
         Best-10
       </a>
       <div className={styles.icons}>
-        <SearchOutlined className={styles.searchIcon}  onClick={() => navigate(routes.search())}/>
+        <SearchOutlined className={styles.searchIcon} onClick={() => navigate(routes.search())} />
         <MenuOutlined className={styles.menuIcon} onClick={() => openSideDrawer()} />
       </div>
     </header>
