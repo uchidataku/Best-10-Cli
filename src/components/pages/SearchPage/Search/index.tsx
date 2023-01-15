@@ -51,7 +51,6 @@ const SearchContent = () => {
   };
 
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click ", e);
     navigate(routes.genre(e.key));
   };
 

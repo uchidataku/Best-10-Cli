@@ -1,25 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
-import { Button, notification } from "antd";
+import { Button, Input, notification, TreeSelect } from "antd";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
 import routes from "../../../../constants/routes";
 import { Toast } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
-import classNames from "classnames";
-import GenreCheckboxModal from "../../../molecules/GenreCheckboxModal";
-import BackDrop from "../../../molecules/BackDrop";
+import GenreCategory from "../../../../models/GenreCategory";
 
 const CreateRanking = () => {
   const navigate = useNavigate();
-  const [openGenreModal, setOpenGenreModal] = useState(false);
   const [title, setTitle] = useState<string>();
   const [genreIds, setGenreIds] = useState<string[]>([]);
-  const closeSideDrawer = (): void => {
-    setOpenGenreModal(false);
-  };
-  const onCheckGenreIds = ({ ids }: { ids: string[] }): void => {
-    setGenreIds(ids);
+  const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
+
+  const treeData = genreCategories.map((genreCategory) => ({
+    title: genreCategory.name,
+    value: genreCategory.id,
+    key: genreCategory.id,
+    children: genreCategory.genres.map((genre) => ({
+      title: genre.name,
+      value: genre.id,
+      key: genre.id,
+    })),
+  }));
+
+  const onChange = (newValue: string[]) => {
+    setGenreIds(newValue);
   };
 
   const onSubmit = () => {
@@ -55,6 +62,22 @@ const CreateRanking = () => {
       });
   };
 
+  async function fetchData() {
+    const request = await axios
+      .get(Api.fetchGenreCategories.buildPath())
+      .then((res) => {
+        setGenreCategories(res.data.genreCategories);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return request;
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.createRanking}>
       <div className={styles.pageTitle}>
@@ -63,7 +86,8 @@ const CreateRanking = () => {
       <div className={styles.form}>
         <div className={styles.title}>
           <p className={styles.titleLabel}>タイトル</p>
-          <input
+          <Input
+            size="large"
             className={styles.titleInput}
             onChange={(e) => setTitle(e.target.value)}
             value={title}
@@ -73,19 +97,22 @@ const CreateRanking = () => {
         </div>
         <div className={styles.genre}>
           <p className={styles.genreLabel}>ジャンル</p>
-          <div
-            className={classNames(styles.genreInput, { [styles.active]: genreIds.length })}
-            onClick={() => setOpenGenreModal(true)}
-          >
-            <p>ジャンル{genreIds.length > 0 && " ・ " + genreIds.length}</p>
-          </div>
+          <TreeSelect
+            size="large"
+            className={styles.genreSelect}
+            treeData={treeData}
+            value={genreIds}
+            multiple
+            listHeight={400}
+            onChange={onChange}
+            treeCheckable={true}
+            placeholder="ジャンル"
+          />
         </div>
         <Button className={styles.createButton} onClick={() => onSubmit()}>
           作成する
         </Button>
       </div>
-      <GenreCheckboxModal onCheck={onCheckGenreIds} isOpen={openGenreModal} />
-      {openGenreModal && <BackDrop closeSideDrawer={closeSideDrawer} />}
     </div>
   );
 };
