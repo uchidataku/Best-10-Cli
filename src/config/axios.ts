@@ -1,16 +1,17 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 import { camelizeKeys, decamelizeKeys } from "humps";
+import { API_HOST } from "./url";
 
 const token = localStorage.getItem("AUTH_TOKEN");
 const client = axios.create({
-  baseURL: "https://api.best-10.co.in",
+  baseURL: API_HOST
 });
 
 if (token) {
   client.interceptors.request.use(async (request) => {
     request.headers = {
       ...request.headers,
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${token}`
     };
     return request;
   });
