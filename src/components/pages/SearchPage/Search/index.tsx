@@ -50,14 +50,17 @@ const SearchContent = () => {
       });
   };
 
-  const items: MenuProps["items"] = genreCategories.map((genreCategory, category_key) =>
+  const onClick: MenuProps["onClick"] = (e) => {
+    console.log("click ", e);
+    navigate(routes.genre(e.key));
+  };
+
+  const items: MenuProps["items"] = genreCategories.map((genreCategory, _key) =>
     getItem(
       genreCategory.name,
-      `category${category_key}`,
+      genreCategory.id,
       <YoutubeOutlined />,
-      genreCategory.genres.map((genre, key) =>
-        getItem(genre.name, `category${category_key}-genre${key}`)
-      )
+      genreCategory.genres.map((genre, _key) => getItem(genre.name, genre.id))
     )
   );
 
@@ -90,7 +93,7 @@ const SearchContent = () => {
       <div>
         <p className={styles.genreLabel}>ジャンル一覧</p>
       </div>
-      <Menu mode="inline" items={items} />
+      <Menu onClick={onClick} mode="inline" items={items} />
     </div>
   );
 };

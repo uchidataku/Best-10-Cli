@@ -4,6 +4,7 @@ const routes = {
   signIn: (): string => "/sign_in",
   signUp: (): string => "/sign_up",
   search: (): string => "/search",
+  genre: (id: string): string => `/genres/${id}`,
   ranking: (): string => "/rankings/:id",
   rankings: (): string => "/rankings",
   information: (): string => "/information",

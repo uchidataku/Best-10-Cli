@@ -19,6 +19,10 @@ const Api = {
     path: "/genre_categories",
     buildPath: () => "/genre_categories",
   },
+  fetchGenre: {
+    path: "/genres/:id",
+    buildPath: (id: string) => `/genres/${id}`,
+  },
   fetchRanking: {
     path: "/rankings/:id",
     buildPath: (id: string) => "/rankings/" + id,
