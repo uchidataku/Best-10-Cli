@@ -22,45 +22,26 @@
         border-width: 0.9px;
         border-radius: $radius-sm;
         border-color: $support-color;
-        margin-right: $space-xs;
         width: 100%;
         height: $size-xxl;
       }
     }
 
     .genre {
-      margin-bottom: $space-md;
+      margin-bottom: $space-sm;
 
       .genreLabel {
         width: 100%;
         margin-bottom: $space-xs;
       }
 
-      //.genreInput {
-      //  border-width: 0.9px;
-      //  border-radius: $radius-sm;
-      //  border-color: $support-color;
-      //  margin-right: $space-xs;
-      //  width: 100%;
-      //  height: $size-xl;
-      //}
-
-      .genreInput {
-        border: 1px solid $support-color;
+      .genreSelect {
+        border-width: 0.3px;
         border-radius: $radius-sm;
-        margin-bottom: $space-xs;
+        border-color: $support-color;
         width: 100%;
-        padding: $space-xs $space-xs;
-
-        &.active {
-          color: $primary-color;
-          font-weight: bold;
-          border: 1px solid $primary-color;
-        }
-      }
-
-      .genreOption {
-        font-size: $f-size-xl;
+        min-height: $size-xxl;
+        height: 100%;
       }
     }
 

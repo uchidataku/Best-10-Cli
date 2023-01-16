@@ -1,12 +1,10 @@
 @import "src/assets/styles/modules";
 
-//.searchButton {
-//  width: 100%;
-//  background-color: $secondary-color;
-//  color: $white;
-//  font-weight: bold;
-//  border-radius: $radius-sm;
-//}
+.genreTitle {
+  font-size: $f-size-lg;
+  font-weight: bold;
+  margin: $space-sm 0;
+}
 
 .listInfo {
   display: flex;
