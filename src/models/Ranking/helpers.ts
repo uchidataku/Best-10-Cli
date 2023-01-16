@@ -111,13 +111,7 @@ export function genreLabelFor(genre?: Genre) {
   }
 }
 
-export const SORT_BY = {
-  popularity: "popularity",
-  newest_to_oldest: "newest_to_oldest",
-} as const;
-export type SortBy = typeof SORT_BY[keyof typeof SORT_BY];
-
-export const SortByObjects = [
-  { value: "popularity", label: "人気順" },
-  { value: "newest_to_oldest", label: "新着順" },
-];
+export enum RankingsSortBy {
+  POPULARITY = "popularity",
+  NEWEST_TO_OLDEST = "newest_to_oldest",
+}

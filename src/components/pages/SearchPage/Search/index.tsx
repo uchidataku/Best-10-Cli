@@ -8,6 +8,8 @@ import { YoutubeOutlined } from "@ant-design/icons";
 import GenreCategory from "../../../../models/GenreCategory";
 import { useNavigate } from "react-router-dom";
 import routes from "../../../../constants/routes";
+import { useRankingsContext } from "../../../../domain/context/RankingsContext";
+import { RankingsSortBy } from "../../../../models/Ranking/helpers";
 
 const { Search } = Input;
 
@@ -31,26 +33,16 @@ function getItem(
 
 const SearchContent = () => {
   const navigate = useNavigate();
-  const [keyword, setKeyword] = useState<string>();
   const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
+  const { setRankingQueryParams } = useRankingsContext();
 
-  const onSearch = () => {
-    axios
-      .get(Api.fetchRankings.buildPath(), {
-        params: { keyword: keyword },
-      })
-      .then((res) => {
-        console.log(res.data);
-        navigate(routes.top());
-        // setRankings(res.data.rankings);
-        // setRankingsCount(res.data.totalDataNums);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const onSearch = (keyword: string) => {
+    setRankingQueryParams({ sortBy: RankingsSortBy.POPULARITY, keyword: keyword });
+    navigate(routes.top());
   };
 
   const onClick: MenuProps["onClick"] = (e) => {
+    setRankingQueryParams({ sortBy: RankingsSortBy.POPULARITY, genreIds: [e.key] });
     navigate(routes.genre(e.key));
   };
 
@@ -85,9 +77,7 @@ const SearchContent = () => {
         className={styles.searchBar}
         size="large"
         placeholder="キーワード"
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-        onSearch={onSearch}
+        onSearch={(v) => onSearch(v)}
       />
       <div>
         <p className={styles.genreLabel}>ジャンル一覧</p>

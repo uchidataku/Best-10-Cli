@@ -1,58 +1,25 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import RankingList from "../../../molecules/RankingList";
-import Ranking from "../../../../models/Ranking";
 import axios from "../../../../config/axios";
 import Api from "../../../../config/qpi";
-import { SortByObjects } from "../../../../models/Ranking/helpers";
+import { RankingsSortBy } from "../../../../models/Ranking/helpers";
 import { useLocation } from "react-router-dom";
 import { ContentOutline } from "antd-mobile-icons";
 import Genre from "../../../../models/Genre";
 import { Radio } from "antd";
+import { useRankingsContext } from "../../../../domain/context/RankingsContext";
 
 const GenreDetail = () => {
   const location = useLocation();
   const genreId = location.pathname.split("/")[2];
   const [genre, setGenre] = useState<Genre>();
-  const [rankings, setRankings] = useState<Ranking[]>([]);
-  const [rankingsCount, setRankingsCount] = useState(0);
-  const defaultSortByParams = SortByObjects[0];
+  const { rankings, rankingsCount, refetch, rankingQueryParams, setRankingQueryParams } =
+    useRankingsContext();
 
-  const onSubmit = (sortBy: string) => {
-    axios
-      .get(Api.fetchRankings.buildPath(), {
-        params: {
-          genreIds: [genreId],
-          sortBy: sortBy,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setRankings(res.data.rankings);
-        setRankingsCount(res.data.totalDataNums);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const onSubmit = (sortBy: RankingsSortBy) => {
+    setRankingQueryParams({ ...rankingQueryParams, sortBy: sortBy });
   };
-
-  async function fetchRankingData() {
-    const request = await axios
-      .get(Api.fetchRankings.buildPath(), {
-        params: {
-          genreIds: [genreId],
-          sortBy: defaultSortByParams.value,
-        },
-      })
-      .then((res) => {
-        setRankings(res.data.rankings);
-        setRankingsCount(res.data.totalDataNums);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return request;
-  }
 
   async function fetchGenreData() {
     const request = await axios
@@ -67,10 +34,14 @@ const GenreDetail = () => {
   }
 
   useEffect(() => {
-    fetchRankingData();
     fetchGenreData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rankingQueryParams]);
 
   return (
     <div className={styles.genreDetail}>
@@ -82,13 +53,13 @@ const GenreDetail = () => {
         <Radio.Group
           size="small"
           onChange={(e) => (e !== null ? onSubmit(e.target.value) : null)}
-          defaultValue={SortByObjects[0].value}
+          defaultValue={RankingsSortBy.POPULARITY}
         >
-          <Radio.Button value={SortByObjects[0].value}>人気順</Radio.Button>
-          <Radio.Button value={SortByObjects[1].value}>新着順</Radio.Button>
+          <Radio.Button value={RankingsSortBy.POPULARITY}>人気順</Radio.Button>
+          <Radio.Button value={RankingsSortBy.NEWEST_TO_OLDEST}>新着順</Radio.Button>
         </Radio.Group>
       </div>
-      <RankingList rankings={rankings} />
+      {rankings && <RankingList rankings={rankings} />}
     </div>
   );
 };
