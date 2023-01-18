@@ -4,7 +4,11 @@ import styles from "./style.module.scss";
 import Ranking from "../../../models/Ranking";
 import Api from "../../../config/qpi";
 
-const RankingCard = (ranking: Ranking) => {
+type RankingCardProps = {
+  ranking: Ranking;
+};
+
+const RankingCard = ({ ranking }: RankingCardProps) => {
   return (
     <a rel="stylesheet" href={Api.fetchRanking.buildPath(ranking.id)}>
       <div className={styles.rankingCard}>

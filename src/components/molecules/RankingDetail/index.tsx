@@ -14,7 +14,7 @@ import LoadMoreItems from "./loadMoreItems";
 import routes from "../../../constants/routes";
 import { useNavigate } from "react-router-dom";
 
-type Props = {
+type RankingDetailProps = {
   rankingId: string;
 };
 
@@ -22,7 +22,7 @@ type FormInput = {
   name: string;
 };
 
-const RankingDetail = ({ rankingId }: Props) => {
+const RankingDetail = ({ rankingId }: RankingDetailProps) => {
   const [ranking, setRanking] = useState<Ranking>();
   const [creator, setCreator] = useState<Account>();
   const [best10Items, setBest10Items] = useState<Item[]>([]);
@@ -35,8 +35,7 @@ const RankingDetail = ({ rankingId }: Props) => {
       .post(Api.createRankingItem.buildPath(rankingId), {
         item: { ...data },
       })
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
         fetchData();
         reset();
         Toast.show({
@@ -76,7 +75,7 @@ const RankingDetail = ({ rankingId }: Props) => {
   };
 
   let loadMoreItems;
-  if (loadMore === true) {
+  if (loadMore) {
     loadMoreItems = <LoadMoreItems items={otherItems} refetchData={refetchData} />;
   } else {
     loadMoreItems = (
@@ -117,7 +116,11 @@ const RankingDetail = ({ rankingId }: Props) => {
         {loadMoreItems}
       </div>
       <form className={styles.addItem} onSubmit={handleSubmit(onSubmit)}>
-        <input className={styles.addItemInput} placeholder={ranking?.title.slice(0, -8)} {...register("name")} />
+        <input
+          className={styles.addItemInput}
+          placeholder={ranking?.title.slice(0, -8)}
+          {...register("name")}
+        />
         <Button className={styles.addItemButton} onClick={handleSubmit(onSubmit)}>
           追加する
         </Button>

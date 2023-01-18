@@ -19,24 +19,25 @@ export type GetRankingsQueryParams = {
   keyword?: string | undefined;
   genreIds?: string[] | undefined;
   sortBy?: "popularity" | "newest_to_oldest" | undefined;
+  page: number;
 };
 
-interface Props {
+interface ReactContextProps {
   children: React.ReactNode;
 }
 
 // FIXME: Refactor
-export const RankingsContextProvider: FC<Props> = ({ children }) => {
+export const RankingsContextProvider: FC<ReactContextProps> = ({ children }) => {
   const [rankings, setRankings] = useState<Ranking[]>([]);
   const [rankingsCount, setRankingsCount] = useState<number>(0);
   const [rankingQueryParams, setRankingQueryParams] = useState<GetRankingsQueryParams>({
     sortBy: RankingsSortBy.POPULARITY,
+    page: 1,
   });
   const isLoading = true;
   const refetch = fetchRankingData;
 
   async function fetchRankingData() {
-    console.log("rankingQueryParams", rankingQueryParams);
     const request = await axios
       .get(Api.fetchRankings.buildPath(), {
         params: rankingQueryParams,

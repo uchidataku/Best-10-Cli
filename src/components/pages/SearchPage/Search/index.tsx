@@ -37,12 +37,12 @@ const SearchContent = () => {
   const { setRankingQueryParams } = useRankingsContext();
 
   const onSearch = (keyword: string) => {
-    setRankingQueryParams({ sortBy: RankingsSortBy.POPULARITY, keyword: keyword });
+    setRankingQueryParams({ sortBy: RankingsSortBy.POPULARITY, keyword: keyword, page: 1 });
     navigate(routes.top());
   };
 
   const onClick: MenuProps["onClick"] = (e) => {
-    setRankingQueryParams({ sortBy: RankingsSortBy.POPULARITY, genreIds: [e.key] });
+    setRankingQueryParams({ sortBy: RankingsSortBy.POPULARITY, genreIds: [e.key], page: 1 });
     navigate(routes.genre(e.key));
   };
 

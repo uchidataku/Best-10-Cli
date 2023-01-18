@@ -59,7 +59,9 @@ const GenreDetail = () => {
           <Radio.Button value={RankingsSortBy.NEWEST_TO_OLDEST}>新着順</Radio.Button>
         </Radio.Group>
       </div>
-      {rankings && <RankingList rankings={rankings} />}
+      {rankings && rankingsCount && (
+        <RankingList rankings={rankings} rankingsCount={rankingsCount} />
+      )}
     </div>
   );
 };

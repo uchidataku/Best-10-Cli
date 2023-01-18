@@ -23,7 +23,6 @@ const SignIn = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem("AUTH_TOKEN", res.data.token);
         navigate(routes.top());
         Toast.show({
