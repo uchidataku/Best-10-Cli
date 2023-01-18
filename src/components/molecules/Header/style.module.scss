@@ -8,11 +8,23 @@
   padding: $space-xs $space-sm;
   margin-bottom: $space-sm;
 
-  .logo {
-    color: $white;
-    margin-bottom: 0;
-    font-weight: bold;
-    font-size: $f-size-xl;
+  .logoGroup {
+    display: flex;
+    align-items: center;
+
+
+    .icon {
+      width: 24px;
+      margin-right: 2px;
+    }
+
+    .logo {
+      width: 120px;
+    }
+  }
+
+  .logoGroup:hover {
+    cursor: pointer;
   }
 
   .icons {
@@ -23,7 +35,7 @@
     }
 
     .menuIcon {
-      font-size: 30px;
+      font-size: 26px;
       color: $white;
     }
   }

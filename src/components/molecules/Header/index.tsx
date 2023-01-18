@@ -3,6 +3,8 @@ import styles from "./style.module.scss";
 import routes from "../../../constants/routes";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import IconImg from "../../../assets/images/Icon.png";
+import LogoImg from "../../../assets/images/Logo.png";
 
 type Props = {
   openSideDrawer: () => void;
@@ -13,9 +15,10 @@ const Header = ({ openSideDrawer }: Props) => {
 
   return (
     <header className={styles.header}>
-      <a className={styles.logo} href={routes.top()}>
-        Best-10
-      </a>
+      <div className={styles.logoGroup} onClick={() => navigate(routes.top())}>
+        <img className={styles.icon} src={IconImg} alt="icon" />
+        <img className={styles.logo} src={LogoImg} alt="logo" />
+      </div>
       <div className={styles.icons}>
         <SearchOutlined className={styles.searchIcon} onClick={() => navigate(routes.search())} />
         <MenuOutlined className={styles.menuIcon} onClick={() => openSideDrawer()} />
