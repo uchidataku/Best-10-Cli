@@ -3,6 +3,7 @@ export const API_HOST = ((): string => {
     case "local":
       return "http://localhost:3000";
     default:
-      return "https://api.best-10.co.in";
+      // return "https://api.best-10.co.in";
+      return "https://best-10.herokuapp.com";
   }
 })();
