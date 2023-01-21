@@ -28,6 +28,7 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
   const [best10Items, setBest10Items] = useState<Item[]>([]);
   const [otherItems, setOtherItems] = useState<Item[]>([]);
   const [loadMore, setloadMore] = useState(false);
+  const [value, setValue] = useState("");
   const { register, handleSubmit, reset } = useForm<FormInput>();
   const navigate = useNavigate();
   const onSubmit = (data: FormInput) => {
@@ -37,6 +38,7 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
       })
       .then(() => {
         fetchData();
+        setValue("");
         reset();
         Toast.show({
           icon: "success",
@@ -115,13 +117,18 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
         ))}
         {loadMoreItems}
       </div>
-      <form className={styles.addItem} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.addItem}>
         <input
           className={styles.addItemInput}
           placeholder={ranking?.title.slice(0, -8)}
           {...register("name")}
+          onChange={(e) => setValue(e.target.value)}
         />
-        <Button className={styles.addItemButton} onClick={handleSubmit(onSubmit)}>
+        <Button
+          disabled={!value}
+          className={value ? styles.addItemButton : styles.addItemButtonsDisable}
+          onClick={handleSubmit(onSubmit)}
+        >
           追加する
         </Button>
       </form>
