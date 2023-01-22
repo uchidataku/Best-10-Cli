@@ -67,25 +67,14 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
     const request = await axios.get(Api.fetchRanking.buildPath(rankingId));
     setRanking(request.data);
     setCreator(request.data.creator);
-    setBest10Items(request.data.items.splice(0, 10));
-    setOtherItems(request.data.items.splice(10));
+    setBest10Items(request.data.items.slice(0, 10));
+    setOtherItems(request.data.items.slice(10));
     return request;
   }
 
   const refetchData = (): void => {
     fetchData();
   };
-
-  let loadMoreItems;
-  if (loadMore) {
-    loadMoreItems = <LoadMoreItems items={otherItems} refetchData={refetchData} />;
-  } else {
-    loadMoreItems = (
-      <div className={styles.loadMoreButton} onClick={() => setloadMore(true)}>
-        load more <DownOutline />
-      </div>
-    );
-  }
 
   useEffect(() => {
     fetchData();
@@ -115,7 +104,12 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
         {best10Items.map((item, idx) => (
           <RankingDetailItem key={item.id} rank={idx + 1} item={item} refetchData={refetchData} />
         ))}
-        {loadMoreItems}
+        {!!otherItems.length && !loadMore && (
+          <div className={styles.loadMoreButton} onClick={() => setloadMore(true)}>
+            もっとみる <DownOutline />
+          </div>
+        )}
+        {loadMore && <LoadMoreItems items={otherItems} refetchData={refetchData} />}
       </div>
       <form className={styles.addItem}>
         <input
