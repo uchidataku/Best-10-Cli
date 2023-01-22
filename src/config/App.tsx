@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PageRoutes from "./PageRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
 import styles from "./style.module.scss";
 import SideDrawer from "../components/molecules/SideDrawer";
 import BackDrop from "../components/molecules/BackDrop";
-import axios from "../config/axios";
-import Api from "../config/qpi";
-import Account from "../models/Account";
 import Header from "../components/molecules/Header";
 import { RankingsContextProvider } from "../domain/context/RankingsContext";
+import {
+  CurrentAccountContextProvider,
+  useCurrentAccountContext,
+} from "../domain/context/CurrentAccountContext";
 
 function App() {
-  const [account, setAccount] = useState<Account>();
+  const { isLoggedIn } = useCurrentAccountContext();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isLogin, setIsLogin] = useState<boolean>(false);
   const closeSideDrawer = (): void => {
     setIsOpen(false);
   };
@@ -23,38 +23,22 @@ function App() {
     setIsOpen(true);
   }
 
-  async function fetchAccount() {
-    const request = await axios.get(Api.fetchCurrentAccount.buildPath());
-    if (request.data !== null) {
-      setAccount(request.data);
-      setIsLogin(true);
-    }
-    return request;
-  }
-
-  useEffect(() => {
-    if (!account) {
-      fetchAccount();
-    } else {
-      setIsLogin(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  console.log("App.isLoggedIn", isLoggedIn);
 
   return (
-    <div>
-      <div className={styles.app}>
-        <main>
+    <div className={styles.app}>
+      <main>
+        <CurrentAccountContextProvider>
           <RankingsContextProvider>
             <Router>
               <Header openSideDrawer={openSideDrawer} />
               <PageRoutes />
             </Router>
           </RankingsContextProvider>
-        </main>
-        <SideDrawer isOpen={isOpen} isLogin={isLogin} />
-        {backdrop}
-      </div>
+        </CurrentAccountContextProvider>
+      </main>
+      <SideDrawer isOpen={isOpen} isLogin={isLoggedIn} />
+      {backdrop}
     </div>
   );
 }

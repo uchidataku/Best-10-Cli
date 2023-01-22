@@ -7,8 +7,10 @@ import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import { useNavigate } from "react-router-dom";
 import routes from "../../../../constants/routes";
 import { notification } from "antd";
+import { useCurrentAccountContext } from "../../../../domain/context/CurrentAccountContext";
 
 const SignIn = () => {
+  const { setAccount, setToken, setIsLoggedIn } = useCurrentAccountContext();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [visible, setVisible] = useState(false);
@@ -23,7 +25,10 @@ const SignIn = () => {
         },
       })
       .then((res) => {
-        localStorage.setItem("AUTH_TOKEN", res.data.token);
+        console.log("res.data", res.data);
+        setAccount(res.data.account);
+        setToken(res.data.token);
+        setIsLoggedIn(true);
         navigate(routes.top());
         Toast.show({
           icon: "success",

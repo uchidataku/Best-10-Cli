@@ -4,14 +4,14 @@ import { API_HOST } from "./url";
 
 const token = localStorage.getItem("AUTH_TOKEN");
 const client = axios.create({
-  baseURL: API_HOST
+  baseURL: API_HOST,
 });
 
 if (token) {
   client.interceptors.request.use(async (request) => {
     request.headers = {
       ...request.headers,
-      authorization: `Bearer ${token}`
+      authorization: `Bearer ${token}`,
     };
     return request;
   });
