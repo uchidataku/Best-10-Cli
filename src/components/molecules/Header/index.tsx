@@ -5,6 +5,7 @@ import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import IconImg from "../../../assets/images/Icon.png";
 import LogoImg from "../../../assets/images/Logo.png";
+import { useRankingsContext } from "../../../domain/context/RankingsContext";
 
 type Props = {
   openSideDrawer: () => void;
@@ -12,10 +13,17 @@ type Props = {
 
 const Header = ({ openSideDrawer }: Props) => {
   const navigate = useNavigate();
+  const { resetRankingQueryParams } = useRankingsContext();
 
   return (
     <header className={styles.header}>
-      <div className={styles.logoGroup} onClick={() => navigate(routes.top())}>
+      <div
+        className={styles.logoGroup}
+        onClick={() => {
+          navigate(routes.top());
+          resetRankingQueryParams();
+        }}
+      >
         <img className={styles.icon} src={IconImg} alt="icon" />
         <img className={styles.logo} src={LogoImg} alt="logo" />
       </div>

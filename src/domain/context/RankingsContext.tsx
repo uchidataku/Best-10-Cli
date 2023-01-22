@@ -11,6 +11,7 @@ type RankingsUseCase = {
   refetch: () => void;
   rankingQueryParams: GetRankingsQueryParams;
   setRankingQueryParams: (params: GetRankingsQueryParams) => void;
+  resetRankingQueryParams: () => void;
 };
 
 export const RankingsContext = createContext<RankingsUseCase | undefined>(undefined);
@@ -36,6 +37,11 @@ export const RankingsContextProvider: FC<ReactContextProps> = ({ children }) => 
   });
   const isLoading = true;
   const refetch = fetchRankingData;
+  const resetRankingQueryParams = () =>
+    setRankingQueryParams({
+      sortBy: RankingsSortBy.POPULARITY,
+      page: 1,
+    });
 
   async function fetchRankingData() {
     const request = await axios
@@ -67,6 +73,7 @@ export const RankingsContextProvider: FC<ReactContextProps> = ({ children }) => 
         refetch,
         rankingQueryParams,
         setRankingQueryParams,
+        resetRankingQueryParams,
       }}
     >
       {children}

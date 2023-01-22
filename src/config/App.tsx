@@ -8,6 +8,7 @@ import axios from "../config/axios";
 import Api from "../config/qpi";
 import Account from "../models/Account";
 import Header from "../components/molecules/Header";
+import { RankingsContextProvider } from "../domain/context/RankingsContext";
 
 function App() {
   const [account, setAccount] = useState<Account>();
@@ -44,10 +45,12 @@ function App() {
     <div>
       <div className={styles.app}>
         <main>
-          <Router>
-            <Header openSideDrawer={openSideDrawer}/>
-            <PageRoutes />
-          </Router>
+          <RankingsContextProvider>
+            <Router>
+              <Header openSideDrawer={openSideDrawer} />
+              <PageRoutes />
+            </Router>
+          </RankingsContextProvider>
         </main>
         <SideDrawer isOpen={isOpen} isLogin={isLogin} />
         {backdrop}
