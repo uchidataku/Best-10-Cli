@@ -9,6 +9,7 @@ import { ContentOutline } from "antd-mobile-icons";
 import Genre from "../../../../models/Genre";
 import { Radio } from "antd";
 import { useRankingsContext } from "../../../../domain/context/RankingsContext";
+import NoData from "../../../molecules/NoData";
 
 const GenreDetail = () => {
   const location = useLocation();
@@ -59,9 +60,10 @@ const GenreDetail = () => {
           <Radio.Button value={RankingsSortBy.NEWEST_TO_OLDEST}>新着順</Radio.Button>
         </Radio.Group>
       </div>
-      {rankings && rankingsCount && (
+      {rankings && !!rankingsCount && (
         <RankingList rankings={rankings} rankingsCount={rankingsCount} />
       )}
+      {!rankings?.length && <NoData />}
     </div>
   );
 };

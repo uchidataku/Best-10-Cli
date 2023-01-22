@@ -6,11 +6,7 @@ const Ranking = () => {
   const location = useLocation();
   const rankingId = location.pathname.split("/")[2];
 
-  return (
-    <div>
-      <RankingDetail rankingId={rankingId} />
-    </div>
-  );
+  return <RankingDetail rankingId={rankingId} />;
 };
 
 export default Ranking;

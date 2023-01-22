@@ -13,6 +13,7 @@ import { DownOutline } from "antd-mobile-icons";
 import LoadMoreItems from "./loadMoreItems";
 import routes from "../../../constants/routes";
 import { useNavigate } from "react-router-dom";
+import NoData from "../NoData";
 
 type RankingDetailProps = {
   rankingId: string;
@@ -101,15 +102,17 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
         </div>
       </div>
       <div className={styles.rankingDetailItems}>
-        {best10Items.map((item, idx) => (
-          <RankingDetailItem key={item.id} rank={idx + 1} item={item} refetchData={refetchData} />
-        ))}
+        {!!best10Items.length &&
+          best10Items.map((item, idx) => (
+            <RankingDetailItem key={item.id} rank={idx + 1} item={item} refetchData={refetchData} />
+          ))}
         {!!otherItems.length && !loadMore && (
           <div className={styles.loadMoreButton} onClick={() => setloadMore(true)}>
             もっとみる <DownOutline />
           </div>
         )}
         {loadMore && <LoadMoreItems items={otherItems} refetchData={refetchData} />}
+        {!best10Items.length && <NoData />}
       </div>
       <form className={styles.addItem}>
         <input
