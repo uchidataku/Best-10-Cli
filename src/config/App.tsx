@@ -1,12 +1,12 @@
 import React from "react";
-import PageRoutes from "./PageRoutes";
 import { AppProvider } from "./provider/AppProvider";
 import "../assets/styles/global.scss";
+import { AppLayout } from "./layout/AppLayout";
 
 const App = () => {
   return (
     <AppProvider>
-      <PageRoutes />
+      <AppLayout />
     </AppProvider>
   );
 };
