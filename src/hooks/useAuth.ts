@@ -2,14 +2,19 @@ import { useQuery } from "react-query";
 import axios from "../config/axios";
 import Api from "../config/qpi";
 import Account from "../models/Account";
+import { useState } from "react";
+import routes from "../constants/routes";
 
 type authState = {
   isLoggedIn: boolean;
   token: string | null;
   currentAccount: Account | undefined;
+  signOut: () => void;
+  refetchCurrentAccount: () => void;
 };
 
 export const useAuth = (): authState => {
+  const [account, setAccount] = useState<Account | undefined>(undefined);
   const token = localStorage.getItem("AUTH_TOKEN");
 
   const fetchCurrentAccount = async () => {
@@ -17,16 +22,23 @@ export const useAuth = (): authState => {
     return res;
   };
 
-  const { data } = useQuery("fetchCurrentAccount", fetchCurrentAccount, { enabled: !token });
+  const { refetch } = useQuery("fetchCurrentAccount", fetchCurrentAccount, {
+    enabled: !!token,
+    onSuccess: (data) => {
+      setAccount(data.data);
+    },
+  });
 
-  const currentAccount = data?.data;
-
-  console.log("token", token);
-  console.log("currentAccount", currentAccount);
+  const signOut = () => {
+    localStorage.clear();
+    window.location.href = routes.top();
+  };
 
   return {
     isLoggedIn: !!token,
     token,
-    currentAccount,
+    currentAccount: account,
+    signOut,
+    refetchCurrentAccount: refetch,
   };
 };
