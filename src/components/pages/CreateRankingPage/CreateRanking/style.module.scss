@@ -45,6 +45,10 @@
       }
     }
 
+    .caption {
+      display: contents;
+    }
+
     .createButton {
       width: 100%;
       background-color: $secondary-color;

@@ -6,15 +6,13 @@ import RankingDetailItem from "../RankingDetailItem";
 import Account from "../../../models/Account";
 import Item from "../../../models/Item";
 import Ranking from "../../../models/Ranking";
-import { Input, notification, Tag } from "antd";
+import { Button, Input, notification, Tag } from "antd";
 import { Toast } from "antd-mobile";
 import { DownOutline } from "antd-mobile-icons";
 import LoadMoreItems from "./loadMoreItems";
 import routes from "../../../constants/routes";
 import { useNavigate } from "react-router-dom";
 import NoData from "../NoData";
-
-const { Search } = Input;
 
 type RankingDetailProps = {
   rankingId: string;
@@ -108,21 +106,26 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
         {loadMore && <LoadMoreItems items={otherItems} refetchData={refetchData} />}
         {!best10Items.length && <NoData />}
       </div>
-      <form className={styles.addItem}>
-        <Search
-          className={styles.addBar}
-          placeholder={ranking?.title.slice(0, -8)}
-          enterButton="追加"
-          value={value}
+      <div>
+        <Input
+          size="large"
+          className={styles.itemInput}
           onChange={(e) => setValue(e.target.value)}
-          onSearch={() => {
-            if (value) {
-              onSubmit(value);
-              setValue("");
-            }
-          }}
+          value={value}
+          type="text"
+          placeholder={ranking?.title.slice(0, -8)}
         />
-      </form>
+        <Button
+          disabled={!value}
+          className={styles.createButton}
+          onClick={() => {
+            onSubmit(value);
+            setValue("");
+          }}
+        >
+          追加する
+        </Button>
+      </div>
     </div>
   );
 };

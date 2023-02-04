@@ -27,20 +27,22 @@
     }
   }
 
-  .rankingDetailItems {
+  .itemInput {
+    border-width: 0.9px;
+    border-radius: $radius-sm;
+    border-color: $support-color;
+    width: 100%;
+    height: $size-xxl;
+    margin-top: $space-sm;
   }
 
-  .addItem {
-    display: flex;
+  .createButton {
     width: 100%;
-    margin-top: $space-md;
-
-    .addBar {
-      border-width: 0.9px;
-      border-radius: $radius-sm;
-      border-color: $support-color;
-      width: 100%;
-    }
+    background-color: $secondary-color;
+    color: $white;
+    font-weight: bold;
+    border-radius: $radius-sm;
+    margin-top: $space-xs;
   }
 }
 

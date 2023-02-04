@@ -92,8 +92,9 @@ const CreateRanking = () => {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
             type="text"
-            placeholder="タイトル"
+            placeholder="XXX Best-10"
           />
+          <caption className={styles.caption}>※ 末尾のBest-10は自動で付与されます</caption>
         </div>
         <div className={styles.genre}>
           <p className={styles.genreLabel}>ジャンル</p>
@@ -109,8 +110,9 @@ const CreateRanking = () => {
             placeholder="ジャンル"
             showSearch={false}
           />
+          <caption className={styles.caption}>※ 複数選択可</caption>
         </div>
-        <Button className={styles.createButton} onClick={() => onSubmit()}>
+        <Button disabled={!title} className={styles.createButton} onClick={() => onSubmit()}>
           作成する
         </Button>
       </div>
