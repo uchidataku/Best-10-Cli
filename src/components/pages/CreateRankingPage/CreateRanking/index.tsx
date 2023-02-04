@@ -37,7 +37,7 @@ const CreateRanking = () => {
           genreIds: genreIds,
         },
       })
-      .then((res) => {
+      .then(() => {
         navigate(routes.top());
         Toast.show({
           icon: "success",
@@ -107,6 +107,7 @@ const CreateRanking = () => {
             onChange={onChange}
             treeCheckable={true}
             placeholder="ジャンル"
+            showSearch={false}
           />
         </div>
         <Button className={styles.createButton} onClick={() => onSubmit()}>
