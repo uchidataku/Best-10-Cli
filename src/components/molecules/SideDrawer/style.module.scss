@@ -37,18 +37,23 @@
       font-weight: bold;
       color: $white;
     }
-
-    p {
-      font-size: $f-size-md;
-      font-weight: bold;
-      color: $white;
-    }
   }
 
   .info {
     margin-bottom: $space-xl;
 
     a {
+      font-size: $f-size-md;
+      font-weight: bold;
+      color: $white;
+    }
+  }
+
+  .logOut {
+    display: flex;
+    justify-content: center;
+
+    p {
       font-size: $f-size-md;
       font-weight: bold;
       color: $white;
