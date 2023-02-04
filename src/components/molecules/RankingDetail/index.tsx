@@ -6,8 +6,7 @@ import RankingDetailItem from "../RankingDetailItem";
 import Account from "../../../models/Account";
 import Item from "../../../models/Item";
 import Ranking from "../../../models/Ranking";
-import { Button, notification, Tag } from "antd";
-import { useForm } from "react-hook-form";
+import { Input, notification, Tag } from "antd";
 import { Toast } from "antd-mobile";
 import { DownOutline } from "antd-mobile-icons";
 import LoadMoreItems from "./loadMoreItems";
@@ -15,12 +14,10 @@ import routes from "../../../constants/routes";
 import { useNavigate } from "react-router-dom";
 import NoData from "../NoData";
 
+const { Search } = Input;
+
 type RankingDetailProps = {
   rankingId: string;
-};
-
-type FormInput = {
-  name: string;
 };
 
 const RankingDetail = ({ rankingId }: RankingDetailProps) => {
@@ -30,17 +27,14 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
   const [otherItems, setOtherItems] = useState<Item[]>([]);
   const [loadMore, setloadMore] = useState(false);
   const [value, setValue] = useState("");
-  const { register, handleSubmit, reset } = useForm<FormInput>();
   const navigate = useNavigate();
-  const onSubmit = (data: FormInput) => {
+  const onSubmit = (name: string) => {
     axios
       .post(Api.createRankingItem.buildPath(rankingId), {
-        item: { ...data },
+        item: { name: name },
       })
       .then(() => {
         fetchData();
-        setValue("");
-        reset();
         Toast.show({
           icon: "success",
           content: "追加しました",
@@ -115,19 +109,19 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
         {!best10Items.length && <NoData />}
       </div>
       <form className={styles.addItem}>
-        <input
-          className={styles.addItemInput}
+        <Search
+          className={styles.addBar}
           placeholder={ranking?.title.slice(0, -8)}
-          {...register("name")}
+          enterButton="追加"
+          value={value}
           onChange={(e) => setValue(e.target.value)}
+          onSearch={() => {
+            if (value) {
+              onSubmit(value);
+              setValue("");
+            }
+          }}
         />
-        <Button
-          disabled={!value}
-          className={value ? styles.addItemButton : styles.addItemButtonsDisable}
-          onClick={handleSubmit(onSubmit)}
-        >
-          追加する
-        </Button>
       </form>
     </div>
   );

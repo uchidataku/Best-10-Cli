@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.scss";
-import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
+import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import classnames from "classnames";
 import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
 import Item from "../../../models/Item";
-import { notification } from "antd";
+import { notification, Spin } from "antd";
 import routes from "../../../constants/routes";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,7 @@ type Props = {
 };
 
 const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
+  const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
 
   function getDetailItemClassName() {
@@ -42,8 +43,9 @@ const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
   async function onClickCreateLike(itemId: string) {
     await axios
       .post(Api.createLike.buildPath(itemId))
-      .then((res) => {
+      .then(() => {
         refetchData();
+        setDisable(false);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -66,8 +68,9 @@ const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
   async function onClickDeleteLike(itemId: string) {
     await axios
       .delete(Api.deleteLike.buildPath(itemId))
-      .then((res) => {
+      .then(() => {
         refetchData();
+        setDisable(false);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -87,13 +90,6 @@ const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
       });
   }
 
-  let icon;
-  if (item.isLiked === true) {
-    icon = <HeartTwoTone style={{ fontSize: "16px" }} twoToneColor="#d73a49" onClick={() => onClickDeleteLike(item.id)} />;
-  } else {
-    icon = <HeartOutlined style={{ fontSize: "16px" }} onClick={() => onClickCreateLike(item.id)} />;
-  }
-
   return (
     <div className={classnames(getDetailItemClassName())}>
       <div className={classnames(getTitleClassName())}>
@@ -103,7 +99,28 @@ const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
       </div>
       <div className={styles.like}>
         <p className={styles.likeCount}>{item.likesCount} likes</p>
-        {icon}
+        {!disable ? (
+          item.isLiked ? (
+            <RiHeart3Fill
+              style={{ fontSize: "16px" }}
+              color="#d73a49"
+              onClick={() => {
+                setDisable(true);
+                onClickDeleteLike(item.id).finally();
+              }}
+            />
+          ) : (
+            <RiHeart3Line
+              style={{ fontSize: "16px" }}
+              onClick={() => {
+                setDisable(true);
+                onClickCreateLike(item.id).finally();
+              }}
+            />
+          )
+        ) : (
+          <Spin size="small" />
+        )}
       </div>
     </div>
   );
