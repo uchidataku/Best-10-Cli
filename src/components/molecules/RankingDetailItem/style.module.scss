@@ -11,24 +11,28 @@
     color: $gold;
     font-size: $f-size-md;
     font-weight: bold;
+    cursor: pointer;
   }
 
   .second {
     color: $silver;
     font-size: $f-size-md;
     font-weight: bold;
+    cursor: pointer;
   }
 
   .third {
     color: $bronze;
     font-size: $f-size-md;
     font-weight: bold;
+    cursor: pointer;
   }
 
   // 4~10位/11位以下
   .title {
     color: $black;
     font-size: $f-size-md;
+    cursor: pointer;
   }
 
   .like {

@@ -8,6 +8,7 @@ import Item from "../../../models/Item";
 import { notification, Spin } from "antd";
 import routes from "../../../constants/routes";
 import { useNavigate } from "react-router-dom";
+import ItemDetailCard from "../ItemDetailCard/ItemDetailCard";
 
 type Props = {
   rank: number;
@@ -17,6 +18,7 @@ type Props = {
 
 const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
   const [disable, setDisable] = useState(false);
+  const [openCard, setOpenCard] = useState(false);
   const navigate = useNavigate();
 
   function getDetailItemClassName() {
@@ -90,39 +92,46 @@ const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
       });
   }
 
+  const onCloseCard = () => {
+    setOpenCard(false);
+  };
+
   return (
-    <div className={classnames(getDetailItemClassName())}>
-      <div className={classnames(getTitleClassName())}>
-        <p>
-          {rank < 11 ? rank : "-"} {item.name}
-        </p>
-      </div>
-      <div className={styles.like}>
-        <p className={styles.likeCount}>{item.likesCount} likes</p>
-        {!disable ? (
-          item.isLiked ? (
-            <RiHeart3Fill
-              style={{ fontSize: "16px" }}
-              color="#d73a49"
-              onClick={() => {
-                setDisable(true);
-                onClickDeleteLike(item.id).finally();
-              }}
-            />
+    <React.Fragment>
+      <div className={classnames(getDetailItemClassName())}>
+        <div className={classnames(getTitleClassName())} onClick={() => setOpenCard(!openCard)}>
+          <p>
+            {rank < 11 ? rank : "-"} {item.name}
+          </p>
+        </div>
+        <div className={styles.like}>
+          <p className={styles.likeCount}>{item.likesCount} likes</p>
+          {!disable ? (
+            item.isLiked ? (
+              <RiHeart3Fill
+                style={{ fontSize: "16px" }}
+                color="#d73a49"
+                onClick={() => {
+                  setDisable(true);
+                  onClickDeleteLike(item.id).finally();
+                }}
+              />
+            ) : (
+              <RiHeart3Line
+                style={{ fontSize: "16px" }}
+                onClick={() => {
+                  setDisable(true);
+                  onClickCreateLike(item.id).finally();
+                }}
+              />
+            )
           ) : (
-            <RiHeart3Line
-              style={{ fontSize: "16px" }}
-              onClick={() => {
-                setDisable(true);
-                onClickCreateLike(item.id).finally();
-              }}
-            />
-          )
-        ) : (
-          <Spin size="small" />
-        )}
+            <Spin size="small" />
+          )}
+        </div>
       </div>
-    </div>
+      {openCard && <ItemDetailCard item={item} closeCard={onCloseCard} />}
+    </React.Fragment>
   );
 };
 
