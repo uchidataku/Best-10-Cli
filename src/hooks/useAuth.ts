@@ -27,6 +27,10 @@ export const useAuth = (): authState => {
     onSuccess: (data) => {
       setAccount(data.data);
     },
+    onError: () => {
+      localStorage.clear();
+      window.location.href = routes.top();
+    },
   });
 
   const signOut = () => {

@@ -35,6 +35,10 @@ const Api = {
     path: "/rankings/:rankingId/items",
     buildPath: (rankingId: string) => "/rankings/" + rankingId + "/items",
   },
+  deleteItem: {
+    path: "/items/:id",
+    buildPath: (id: string) => `/items/${id}`,
+  },
   createLike: {
     path: "/items/:itemId/likes",
     buildPath: (itemId: string) => "/items/" + itemId + "/likes",
