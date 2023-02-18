@@ -25,7 +25,15 @@ const Api = {
   },
   fetchRanking: {
     path: "/rankings/:id",
-    buildPath: (id: string) => "/rankings/" + id,
+    buildPath: (id: string) => `/rankings/${id}`,
+  },
+  updateRanking: {
+    path: "/rankings/:id",
+    buildPath: (id: string) => `/rankings/${id}`,
+  },
+  deleteRanking: {
+    path: "/rankings/:id",
+    buildPath: (id: string) => `/rankings/${id}`,
   },
   createRanking: {
     path: "/rankings",
@@ -33,7 +41,7 @@ const Api = {
   },
   createRankingItem: {
     path: "/rankings/:rankingId/items",
-    buildPath: (rankingId: string) => "/rankings/" + rankingId + "/items",
+    buildPath: (rankingId: string) => `/rankings/${rankingId}/items`,
   },
   deleteItem: {
     path: "/items/:id",
@@ -41,11 +49,11 @@ const Api = {
   },
   createLike: {
     path: "/items/:itemId/likes",
-    buildPath: (itemId: string) => "/items/" + itemId + "/likes",
+    buildPath: (itemId: string) => `/items/${itemId}/likes`,
   },
   deleteLike: {
     path: "/items/:itemId/likes",
-    buildPath: (itemId: string) => "/items/" + itemId + "/likes",
+    buildPath: (itemId: string) => `/items/${itemId}/likes`,
   },
 };
 

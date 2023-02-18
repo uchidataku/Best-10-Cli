@@ -12,9 +12,16 @@
   }
 
   .rankingSubInfo {
-    .creator {
-      color: $support-color;
-      margin-bottom: $space-base;
+    .creatorInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $space-xs;
+
+      .creator {
+        color: $support-color;
+        margin-bottom: $space-base;
+      }
     }
 
     .genres {

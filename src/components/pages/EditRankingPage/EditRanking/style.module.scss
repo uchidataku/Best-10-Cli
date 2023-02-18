@@ -1,0 +1,79 @@
+@import "src/assets/styles/modules";
+
+.editRanking {
+  .pageTitle {
+    margin-bottom: $space-md;
+
+    h2 {
+      font-weight: bold;
+    }
+  }
+
+  .form {
+    .title {
+      margin-bottom: $space-md;
+
+      .titleLabel {
+        width: 100%;
+        margin-bottom: $space-xs;
+      }
+
+      .titleInput {
+        border-width: 0.9px;
+        border-radius: $radius-sm;
+        border-color: $support-color;
+        width: 100%;
+        height: $size-xxl;
+      }
+    }
+
+    .genre {
+      margin-bottom: $space-sm;
+
+      .genreLabel {
+        width: 100%;
+        margin-bottom: $space-xs;
+      }
+
+      .genreSelect {
+        border-width: 0.3px;
+        border-radius: $radius-sm;
+        border-color: $support-color;
+        width: 100%;
+        min-height: $size-xxl;
+        height: 100%;
+      }
+    }
+
+    .caption {
+      display: contents;
+    }
+
+    .updateButton {
+      width: 100%;
+      background-color: $secondary-color;
+      color: $white;
+      font-weight: bold;
+      border-radius: $radius-sm;
+      margin-top: $space-sm;
+    }
+
+    .cancelButton {
+      width: 100%;
+      background-color: $support-color;
+      color: $white;
+      font-weight: bold;
+      border-radius: $radius-sm;
+      margin-top: $space-xs;
+    }
+
+    .deleteButton {
+      width: 100%;
+      background-color: $danger-color;
+      color: $white;
+      font-weight: bold;
+      border-radius: $radius-sm;
+      margin-top: $space-xs;
+    }
+  }
+}

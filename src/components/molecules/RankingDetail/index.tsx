@@ -13,6 +13,7 @@ import LoadMoreItems from "./loadMoreItems";
 import routes from "../../../constants/routes";
 import { useNavigate } from "react-router-dom";
 import NoData from "../NoData";
+import { EditOutlined } from "@ant-design/icons";
 
 type RankingDetailProps = {
   rankingId: string;
@@ -81,8 +82,13 @@ const RankingDetail = ({ rankingId }: RankingDetailProps) => {
           <p>{ranking?.title}</p>
         </div>
         <div className={styles.rankingSubInfo}>
-          <div className={styles.creator}>
-            <p>created by {creator?.username}</p>
+          <div className={styles.creatorInfo}>
+            <div className={styles.creator}>
+              <p>created by {creator?.username}</p>
+            </div>
+            {ranking?.viewerCanUpdate && (
+              <EditOutlined key="edit" onClick={() => navigate(routes.editRanking(rankingId))} />
+            )}
           </div>
           <div className={styles.genres}>
             {ranking?.genres.map((genre, idx) => (

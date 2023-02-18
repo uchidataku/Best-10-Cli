@@ -10,6 +10,7 @@ import RankingPage from "../components/pages/RankingPage";
 import CreateRankingPage from "../components/pages/CreateRankingPage";
 import SearchPage from "../components/pages/SearchPage";
 import GenreDetailPage from "../components/pages/GenreDetailPage";
+import EditRankingPage from "../components/pages/EditRankingPage";
 
 const PageRoutes = () => {
   return (
@@ -20,7 +21,8 @@ const PageRoutes = () => {
       <Route path={routes.about()} element={<AboutPage />} />
       <Route path={routes.signUp()} element={<SignUpPage />} />
       <Route path={routes.signIn()} element={<SignInPage />} />
-      <Route path={routes.ranking()} element={<RankingPage />} />
+      <Route path={routes.ranking(":id")} element={<RankingPage />} />
+      <Route path={routes.editRanking(":id")} element={<EditRankingPage />} />
       <Route path={routes.rankings()} element={<CreateRankingPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

@@ -5,6 +5,8 @@ interface Ranking {
   title: string;
   itemsCount: number;
   allLikesCount: number;
+  viewerCanUpdate: boolean;
+  viewerCanDelete: boolean;
   genres: Genre[];
 }
 
