@@ -130,7 +130,9 @@ const RankingDetailItem = ({ rank, item, refetchData }: Props) => {
           )}
         </div>
       </div>
-      {openCard && <ItemDetailCard item={item} closeCard={onCloseCard} />}
+      {openCard && (
+        <ItemDetailCard item={item} closeCard={onCloseCard} refetchItems={refetchData} />
+      )}
     </React.Fragment>
   );
 };

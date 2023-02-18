@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Meta } from "antd/lib/list/Item";
 import { Card, notification } from "antd";
@@ -8,19 +8,24 @@ import { Modal } from "antd-mobile";
 import { useMutation } from "react-query";
 import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
+import { useAuth } from "../../../hooks/useAuth";
 
 type ItemDetailCardProps = {
   item: Item;
   closeCard: () => void;
+  refetchItems: () => void;
 };
 
-const ItemDetailCard = ({ item, closeCard }: ItemDetailCardProps) => {
+const ItemDetailCard = ({ item, closeCard, refetchItems }: ItemDetailCardProps) => {
+  const { currentAccount } = useAuth();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const { mutate: onDeleteItem } = useMutation(
     () => axios.delete(Api.deleteItem.buildPath(item.id)),
     {
       onSuccess: () => {
+        setOpenDeleteModal(false);
+        refetchItems();
         notification.success({ message: "削除しました" });
       },
       onError: () => {
@@ -28,6 +33,23 @@ const ItemDetailCard = ({ item, closeCard }: ItemDetailCardProps) => {
       },
     }
   );
+  const itemActions = useMemo(() => {
+    return currentAccount
+      ? [
+          <EditOutlined key="edit" />,
+          <DeleteOutlined
+            key="delete"
+            onClick={() =>
+              item.viewerCanDelete
+                ? setOpenDeleteModal(true)
+                : notification.error({
+                    message: "削除する権限がありません",
+                  })
+            }
+          />,
+        ]
+      : [];
+  }, [currentAccount, item.viewerCanDelete]);
 
   return (
     <React.Fragment>
@@ -40,20 +62,7 @@ const ItemDetailCard = ({ item, closeCard }: ItemDetailCardProps) => {
               src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
             />
           }
-          actions={[
-            // <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <DeleteOutlined
-              key="delete"
-              onClick={() =>
-                item.viewerCanDelete
-                  ? setOpenDeleteModal(true)
-                  : notification.error({
-                      message: "削除する権限がありません",
-                    })
-              }
-            />,
-          ]}
+          actions={itemActions}
         >
           <Meta title={item.name} description="This is the description" />
         </Card>
