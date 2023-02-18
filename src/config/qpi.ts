@@ -43,6 +43,10 @@ const Api = {
     path: "/rankings/:rankingId/items",
     buildPath: (rankingId: string) => `/rankings/${rankingId}/items`,
   },
+  updateItem: {
+    path: "/items/:id",
+    buildPath: (id: string) => `/items/${id}`,
+  },
   deleteItem: {
     path: "/items/:id",
     buildPath: (id: string) => `/items/${id}`,

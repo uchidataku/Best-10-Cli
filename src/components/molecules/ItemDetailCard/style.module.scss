@@ -19,3 +19,61 @@
   background: rgba(0, 0, 0, 0.3);
   z-index: 100;
 }
+
+.editItemCard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 300px;
+  min-width: 300px;
+  z-index: 200;
+  background-color: white;
+  padding: $space-sm;
+  border-radius: $radius-sm;
+
+  .cardTitle {
+    margin-bottom: $space-md;
+
+    h3 {
+      font-weight: bold;
+    }
+  }
+
+  .form {
+    .name {
+      margin-bottom: $space-md;
+
+      .nameLabel {
+        width: 100%;
+        margin-bottom: $space-xs;
+      }
+
+      .nameInput {
+        border-width: 0.9px;
+        border-radius: $radius-sm;
+        border-color: $support-color;
+        width: 100%;
+        height: $size-xxl;
+      }
+    }
+
+    .updateButton {
+      width: 100%;
+      background-color: $secondary-color;
+      color: $white;
+      font-weight: bold;
+      border-radius: $radius-sm;
+      margin-top: $space-sm;
+    }
+
+    .cancelButton {
+      width: 100%;
+      background-color: $support-color;
+      color: $white;
+      font-weight: bold;
+      border-radius: $radius-sm;
+      margin-top: $space-xs;
+    }
+  }
+}
