@@ -1,8 +1,8 @@
-import Header from "../../components/molecules/Header";
+import Header from "../../components/molecules/Header/Header";
 import PageRoutes from "../PageRoutes";
-import SideDrawer from "../../components/molecules/SideDrawer";
+import SideDrawer from "../../components/molecules/SideDrawer/SideDrawer";
 import React, { useState } from "react";
-import BackDrop from "../../components/molecules/BackDrop";
+import BackDrop from "../../components/molecules/BackDrop/BackDrop";
 import { useAuth } from "../../hooks/useAuth";
 import styles from "./style.module.scss";
 

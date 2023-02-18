@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "../../../config/axios";
 import Api from "../../../config/qpi";
 import styles from "./style.module.scss";
-import RankingDetailItem from "../RankingDetailItem";
+import RankingDetailItem from "../RankingDetailItem/RankingDetailItem";
 import Account from "../../../models/Account";
 import Item from "../../../models/Item";
 import Ranking from "../../../models/Ranking";
 import { Button, Input, notification, Tag } from "antd";
 import { Toast } from "antd-mobile";
 import { DownOutline } from "antd-mobile-icons";
-import LoadMoreItems from "./loadMoreItems";
+import LoadMoreItems from "./LoadMoreItems";
 import routes from "../../../constants/routes";
 import { useNavigate } from "react-router-dom";
-import NoData from "../NoData";
+import NoData from "../NoData/NoData";
 import { EditOutlined } from "@ant-design/icons";
 
 type RankingDetailProps = {

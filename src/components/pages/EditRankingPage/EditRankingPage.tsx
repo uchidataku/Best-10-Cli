@@ -1,5 +1,5 @@
 import React from "react";
-import EditRanking from "./EditRanking";
+import EditRanking from "./EditRanking/EditRanking";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "../../../config/axios";

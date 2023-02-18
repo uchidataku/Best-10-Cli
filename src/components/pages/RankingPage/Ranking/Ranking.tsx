@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import RankingDetail from "../../../molecules/RankingDetail";
+import RankingDetail from "../../../molecules/RankingDetail/RankingDetail";
 
 const Ranking = () => {
   const location = useLocation();

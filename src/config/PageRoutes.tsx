@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import routes from "../constants/routes";
-import TopPage from "../components/pages/TopPage";
-import AboutPage from "../components/pages/AboutPage";
-import SignUpPage from "../components/pages/SignUpPage";
-import SignInPage from "../components/pages/SignInPage";
-import NotFoundPage from "../components/pages/NotFoundPage";
-import RankingPage from "../components/pages/RankingPage";
-import CreateRankingPage from "../components/pages/CreateRankingPage";
-import SearchPage from "../components/pages/SearchPage";
-import GenreDetailPage from "../components/pages/GenreDetailPage";
-import EditRankingPage from "../components/pages/EditRankingPage";
+import TopPage from "../components/pages/TopPage/TopPage";
+import AboutPage from "../components/pages/AboutPage/AboutPage";
+import SignUpPage from "../components/pages/SignUpPage/SignUpPage";
+import SignInPage from "../components/pages/SignInPage/SignInPage";
+import NotFoundPage from "../components/pages/NotFoundPage/NotFoundPage";
+import RankingPage from "../components/pages/RankingPage/RakingPage";
+import CreateRankingPage from "../components/pages/CreateRankingPage/CreateRankingPage";
+import SearchPage from "../components/pages/SearchPage/SearchPage";
+import GenreDetailPage from "../components/pages/GenreDetailPage/GenreDetailPage";
+import EditRankingPage from "../components/pages/EditRankingPage/EditRankingPage";
 
 const PageRoutes = () => {
   return (

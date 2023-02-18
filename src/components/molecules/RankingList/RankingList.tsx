@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import RankingCard from "../RankingCard";
+import RankingCard from "../RankingCard/RankingCard";
 import styles from "./style.module.scss";
 import Ranking from "../../../models/Ranking";
 import { Pagination } from "antd";

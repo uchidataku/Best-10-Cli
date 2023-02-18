@@ -1,5 +1,5 @@
 import React from "react";
-import CreateRanking from "./CreateRanking";
+import CreateRanking from "./CreateRanking/CreateRanking";
 
 const CreateRankingPage = () => {
   return <CreateRanking />;

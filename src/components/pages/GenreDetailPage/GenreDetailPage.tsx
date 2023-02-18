@@ -1,5 +1,5 @@
 import React from "react";
-import GenreDetail from "./GenreDetail";
+import GenreDetail from "./GenreDetail/GenreDetail";
 
 const GenreDetailPage = () => {
   return <GenreDetail />;

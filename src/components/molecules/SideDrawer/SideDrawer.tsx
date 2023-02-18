@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./style.module.scss";
 import classNames from "classnames";
-import LoginMenu from "./loginMenu";
-import NotLoginMenu from "./notLoginMenu";
+import LoginMenu from "./LoginMenu";
+import NotLoginMenu from "./NotLoginMenu";
 
 type Props = {
   isOpen: boolean;
@@ -12,7 +12,13 @@ type Props = {
 const SideDrawer = ({ isOpen, isLogin }: Props) => {
   const menuComponent = isLogin ? <LoginMenu /> : <NotLoginMenu />;
 
-  return <div className={isOpen ? classNames(styles.sideDrawer, styles.sideDrawerOpen) : styles.sideDrawer}>{menuComponent}</div>;
+  return (
+    <div
+      className={isOpen ? classNames(styles.sideDrawer, styles.sideDrawerOpen) : styles.sideDrawer}
+    >
+      {menuComponent}
+    </div>
+  );
 };
 
 export default SideDrawer;

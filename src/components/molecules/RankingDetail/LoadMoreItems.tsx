@@ -1,6 +1,6 @@
 import React from "react";
 import Item from "../../../models/Item";
-import RankingDetailItem from "../RankingDetailItem";
+import RankingDetailItem from "../RankingDetailItem/RankingDetailItem";
 
 type Props = {
   items: Item[];
