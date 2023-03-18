@@ -1,13 +1,5 @@
 @import "src/assets/styles/modules";
 
-//.searchButton {
-//  width: 100%;
-//  background-color: $secondary-color;
-//  color: $white;
-//  font-weight: bold;
-//  border-radius: $radius-sm;
-//}
-
 .listInfo {
   display: flex;
   justify-content: space-between;
@@ -17,4 +9,10 @@
     text-align: right;
     margin: $space-xs 0;
   }
+}
+
+.spin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

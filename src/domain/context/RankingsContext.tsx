@@ -1,8 +1,9 @@
-import { createContext, FC, useContext, useEffect, useState } from "react";
+import { createContext, FC, useContext, useState } from "react";
 import Ranking from "../../models/Ranking";
 import axios from "../../config/axios";
 import Api from "../../config/qpi";
 import { RankingsSortBy } from "../../models/Ranking/helpers";
+import { useQuery } from "react-query";
 
 type RankingsUseCase = {
   rankings?: Ranking[];
@@ -29,46 +30,40 @@ interface ReactContextProps {
 
 // FIXME: Refactor
 export const RankingsContextProvider: FC<ReactContextProps> = ({ children }) => {
-  const [rankings, setRankings] = useState<Ranking[]>([]);
-  const [rankingsCount, setRankingsCount] = useState<number>(0);
   const [rankingQueryParams, setRankingQueryParams] = useState<GetRankingsQueryParams>({
     sortBy: RankingsSortBy.POPULARITY,
     page: 1,
   });
-  const isLoading = true;
-  const refetch = fetchRankingData;
   const resetRankingQueryParams = () =>
     setRankingQueryParams({
       sortBy: RankingsSortBy.POPULARITY,
       page: 1,
     });
 
-  async function fetchRankingData() {
-    const request = await axios
-      .get(Api.fetchRankings.buildPath(), {
-        params: rankingQueryParams,
-      })
-      .then((res) => {
-        setRankings(res.data.rankings);
-        setRankingsCount(res.data.totalDataNums);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return request;
-  }
-
-  useEffect(() => {
-    fetchRankingData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const fetchRankings = async () => {
+    const res = axios.get(Api.fetchRankings.buildPath(), {
+      params: rankingQueryParams,
+    });
+    console.log("fetchRankings呼ばれた");
+    console.log("rankingQueryParams", rankingQueryParams);
+    return res;
+  };
+  const { data, refetch, isLoading } = useQuery(
+    `fetchRankings/${rankingQueryParams}`,
+    fetchRankings,
+    {
+      onError: (e) => {
+        console.log(e);
+      },
+    }
+  );
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
     <RankingsContext.Provider
       value={{
-        rankings,
-        rankingsCount,
+        rankings: data?.data.rankings,
+        rankingsCount: data?.data.totalDataNums,
         isLoading,
         refetch,
         rankingQueryParams,

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import RankingList from "../../../molecules/RankingList/RankingList";
 import styles from "./style.module.scss";
-import { Radio } from "antd";
+import { Radio, Spin } from "antd";
 import { ContentOutline } from "antd-mobile-icons";
 import { RankingsSortBy } from "../../../../models/Ranking/helpers";
 import { useRankingsContext } from "../../../../domain/context/RankingsContext";
 import NoData from "../../../molecules/NoData/NoData";
 
 const Top = () => {
-  const { rankings, rankingsCount, refetch, rankingQueryParams, setRankingQueryParams } =
+  const { rankings, rankingsCount, refetch, isLoading, rankingQueryParams, setRankingQueryParams } =
     useRankingsContext();
 
   const onSubmit = (sortBy: RankingsSortBy) => {
@@ -16,6 +16,8 @@ const Top = () => {
   };
 
   useEffect(() => {
+    console.log("useEffect呼ばれた");
+    console.log("rankingQueryParams", rankingQueryParams);
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rankingQueryParams]);
@@ -35,10 +37,16 @@ const Top = () => {
           <Radio.Button value={RankingsSortBy.NEWEST_TO_OLDEST}>新着順</Radio.Button>
         </Radio.Group>
       </div>
-      {rankings && !!rankingsCount && (
-        <RankingList rankings={rankings} rankingsCount={rankingsCount} />
+      {isLoading ? (
+        <Spin className={styles.spin} />
+      ) : (
+        <React.Fragment>
+          {rankings && !!rankingsCount && (
+            <RankingList rankings={rankings} rankingsCount={rankingsCount} />
+          )}
+          {!rankings?.length && <NoData />}
+        </React.Fragment>
       )}
-      {!rankings?.length && <NoData />}
     </div>
   );
 };
