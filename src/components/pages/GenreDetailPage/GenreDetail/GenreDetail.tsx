@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./style.module.scss";
 import RankingList from "../../../molecules/RankingList/RankingList";
 import axios from "../../../../config/axios";
@@ -6,47 +6,34 @@ import Api from "../../../../config/qpi";
 import { RankingsSortBy } from "../../../../models/Ranking/helpers";
 import { useLocation } from "react-router-dom";
 import { ContentOutline } from "antd-mobile-icons";
-import Genre from "../../../../models/Genre";
-import { Radio } from "antd";
+import { Radio, Spin } from "antd";
 import { useRankingsContext } from "../../../../domain/context/RankingsContext";
 import NoData from "../../../molecules/NoData/NoData";
+import { useQuery } from "react-query";
 
 const GenreDetail = () => {
   const location = useLocation();
   const genreId = location.pathname.split("/")[2];
-  const [genre, setGenre] = useState<Genre>();
-  const { rankings, rankingsCount, refetch, rankingQueryParams, setRankingQueryParams } =
-    useRankingsContext();
+  const { rankings, rankingsCount, isLoading, setQueryParams } = useRankingsContext();
 
   const onSubmit = (sortBy: RankingsSortBy) => {
-    setRankingQueryParams({ ...rankingQueryParams, sortBy: sortBy });
+    setQueryParams("sortBy", sortBy);
   };
 
-  async function fetchGenreData() {
-    const request = await axios
-      .get(Api.fetchGenre.buildPath(genreId))
-      .then((res) => {
-        setGenre(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return request;
-  }
+  const fetchGenre = async () => {
+    const res = await axios.get(Api.fetchGenre.buildPath(genreId));
+    return res;
+  };
 
-  useEffect(() => {
-    fetchGenreData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rankingQueryParams]);
+  const { data } = useQuery(`fetchGenre/${genreId}`, fetchGenre, {
+    onError: (e) => {
+      console.log(e);
+    },
+  });
 
   return (
     <div className={styles.genreDetail}>
-      <p className={styles.genreTitle}>{genre?.name}</p>
+      <p className={styles.genreTitle}>{data?.data.name}</p>
       <div className={styles.listInfo}>
         <div className={styles.rankingsCount}>
           <ContentOutline /> {rankingsCount}
@@ -60,8 +47,14 @@ const GenreDetail = () => {
           <Radio.Button value={RankingsSortBy.NEWEST_TO_OLDEST}>新着順</Radio.Button>
         </Radio.Group>
       </div>
-      {rankings && !!rankingsCount && (
-        <RankingList rankings={rankings} rankingsCount={rankingsCount} />
+      {isLoading ? (
+        <Spin className={styles.spin} />
+      ) : (
+        <React.Fragment>
+          {rankings && !!rankingsCount && (
+            <RankingList rankings={rankings} rankingsCount={rankingsCount} />
+          )}
+        </React.Fragment>
       )}
       {!rankings?.length && <NoData />}
     </div>

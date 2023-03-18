@@ -1,18 +1,18 @@
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, FC, useCallback, useContext, useEffect } from "react";
 import Ranking from "../../models/Ranking";
 import axios from "../../config/axios";
 import Api from "../../config/qpi";
 import { RankingsSortBy } from "../../models/Ranking/helpers";
 import { useQuery } from "react-query";
+import { useForm, UseFormSetValue } from "react-hook-form";
 
 type RankingsUseCase = {
   rankings?: Ranking[];
   rankingsCount?: number;
   isLoading?: boolean;
   refetch: () => void;
-  rankingQueryParams: GetRankingsQueryParams;
-  setRankingQueryParams: (params: GetRankingsQueryParams) => void;
-  resetRankingQueryParams: () => void;
+  setQueryParams: UseFormSetValue<GetRankingsQueryParams>;
+  resetQueryParams: () => void;
 };
 
 export const RankingsContext = createContext<RankingsUseCase | undefined>(undefined);
@@ -30,26 +30,23 @@ interface ReactContextProps {
 
 // FIXME: Refactor
 export const RankingsContextProvider: FC<ReactContextProps> = ({ children }) => {
-  const [rankingQueryParams, setRankingQueryParams] = useState<GetRankingsQueryParams>({
-    sortBy: RankingsSortBy.POPULARITY,
-    page: 1,
-  });
-  const resetRankingQueryParams = () =>
-    setRankingQueryParams({
-      sortBy: RankingsSortBy.POPULARITY,
-      page: 1,
-    });
+  const { watch, reset, setValue } = useForm<GetRankingsQueryParams>();
 
   const fetchRankings = async () => {
     const res = axios.get(Api.fetchRankings.buildPath(), {
-      params: rankingQueryParams,
+      params: {
+        keyword: watch("keyword"),
+        genreIds: watch("genreIds"),
+        sortBy: watch("sortBy"),
+        page: watch("page"),
+      },
     });
-    console.log("fetchRankings呼ばれた");
-    console.log("rankingQueryParams", rankingQueryParams);
     return res;
   };
+
+  // TODO: uniqueKeyをもっとスマートに生成する
   const { data, refetch, isLoading } = useQuery(
-    `fetchRankings/${rankingQueryParams}`,
+    `fetchRankings/${watch("keyword")}/${watch("genreIds")}/${watch("sortBy")}/${watch("page")}`,
     fetchRankings,
     {
       onError: (e) => {
@@ -57,6 +54,18 @@ export const RankingsContextProvider: FC<ReactContextProps> = ({ children }) => 
       },
     }
   );
+  const resetQueryParams = useCallback(() => {
+    reset({
+      sortBy: RankingsSortBy.POPULARITY,
+      page: 1,
+    });
+  }, [reset]);
+
+  useEffect(() => {
+    resetQueryParams();
+  }, [resetQueryParams]);
+
+  console.log("watch(sortBy)", watch("sortBy"));
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
@@ -66,9 +75,8 @@ export const RankingsContextProvider: FC<ReactContextProps> = ({ children }) => 
         rankingsCount: data?.data.totalDataNums,
         isLoading,
         refetch,
-        rankingQueryParams,
-        setRankingQueryParams,
-        resetRankingQueryParams,
+        setQueryParams: setValue,
+        resetQueryParams,
       }}
     >
       {children}

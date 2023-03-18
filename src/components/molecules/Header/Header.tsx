@@ -13,7 +13,7 @@ type Props = {
 
 const Header = ({ openSideDrawer }: Props) => {
   const navigate = useNavigate();
-  const { resetRankingQueryParams } = useRankingsContext();
+  const { resetQueryParams } = useRankingsContext();
 
   return (
     <header className={styles.header}>
@@ -21,7 +21,7 @@ const Header = ({ openSideDrawer }: Props) => {
         className={styles.logoGroup}
         onClick={() => {
           navigate(routes.top());
-          resetRankingQueryParams();
+          resetQueryParams();
         }}
       >
         <img className={styles.icon} src={IconImg} alt="icon" />

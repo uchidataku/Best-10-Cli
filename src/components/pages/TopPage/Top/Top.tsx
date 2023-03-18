@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import RankingList from "../../../molecules/RankingList/RankingList";
 import styles from "./style.module.scss";
 import { Radio, Spin } from "antd";
@@ -8,19 +8,11 @@ import { useRankingsContext } from "../../../../domain/context/RankingsContext";
 import NoData from "../../../molecules/NoData/NoData";
 
 const Top = () => {
-  const { rankings, rankingsCount, refetch, isLoading, rankingQueryParams, setRankingQueryParams } =
-    useRankingsContext();
+  const { rankings, rankingsCount, isLoading, setQueryParams } = useRankingsContext();
 
   const onSubmit = (sortBy: RankingsSortBy) => {
-    setRankingQueryParams({ ...rankingQueryParams, sortBy: sortBy });
+    setQueryParams("sortBy", sortBy);
   };
-
-  useEffect(() => {
-    console.log("useEffect呼ばれた");
-    console.log("rankingQueryParams", rankingQueryParams);
-    refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rankingQueryParams]);
 
   return (
     <div>
