@@ -13,12 +13,11 @@ type Props = {
 const RankingList = ({ rankings, rankingsCount }: Props) => {
   const pageIndex = 50;
   const [current, setCurrent] = useState<number>(1);
-
-  const { rankingQueryParams, setRankingQueryParams } = useRankingsContext();
+  const { setQueryParams } = useRankingsContext();
 
   const onChangePage = (page: number) => {
     setCurrent(page);
-    setRankingQueryParams({ ...rankingQueryParams, page: page });
+    setQueryParams("page", page);
     window.scrollTo({ top: 0 });
   };
 

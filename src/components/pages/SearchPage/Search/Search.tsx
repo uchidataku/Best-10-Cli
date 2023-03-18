@@ -9,7 +9,6 @@ import GenreCategory from "../../../../models/GenreCategory";
 import { useNavigate } from "react-router-dom";
 import routes from "../../../../constants/routes";
 import { useRankingsContext } from "../../../../domain/context/RankingsContext";
-import { RankingsSortBy } from "../../../../models/Ranking/helpers";
 import { BiCameraMovie, BiMusic, BiHealth } from "react-icons/bi";
 import { FaMountain, FaDog, FaRunning, FaCarAlt } from "react-icons/fa";
 import {
@@ -93,15 +92,15 @@ const genreIconFor = (categoryName: string) => {
 const SearchContent = () => {
   const navigate = useNavigate();
   const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([]);
-  const { setRankingQueryParams } = useRankingsContext();
+  const { setQueryParams } = useRankingsContext();
 
   const onSearch = (keyword: string) => {
-    setRankingQueryParams({ sortBy: RankingsSortBy.POPULARITY, keyword: keyword, page: 1 });
+    setQueryParams("keyword", keyword);
     navigate(routes.top());
   };
 
   const onClick: MenuProps["onClick"] = (e) => {
-    setRankingQueryParams({ sortBy: RankingsSortBy.POPULARITY, genreIds: [e.key], page: 1 });
+    setQueryParams("genreIds", [e.key]);
     navigate(routes.genre(e.key));
   };
 

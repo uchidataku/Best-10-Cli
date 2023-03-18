@@ -1,17 +1,18 @@
-import { createContext, FC, useContext, useEffect, useState } from "react";
+import { createContext, FC, useCallback, useContext, useEffect } from "react";
 import Ranking from "../../models/Ranking";
 import axios from "../../config/axios";
 import Api from "../../config/qpi";
 import { RankingsSortBy } from "../../models/Ranking/helpers";
+import { useQuery } from "react-query";
+import { useForm, UseFormSetValue } from "react-hook-form";
 
 type RankingsUseCase = {
   rankings?: Ranking[];
   rankingsCount?: number;
   isLoading?: boolean;
   refetch: () => void;
-  rankingQueryParams: GetRankingsQueryParams;
-  setRankingQueryParams: (params: GetRankingsQueryParams) => void;
-  resetRankingQueryParams: () => void;
+  setQueryParams: UseFormSetValue<GetRankingsQueryParams>;
+  resetQueryParams: () => void;
 };
 
 export const RankingsContext = createContext<RankingsUseCase | undefined>(undefined);
@@ -29,51 +30,53 @@ interface ReactContextProps {
 
 // FIXME: Refactor
 export const RankingsContextProvider: FC<ReactContextProps> = ({ children }) => {
-  const [rankings, setRankings] = useState<Ranking[]>([]);
-  const [rankingsCount, setRankingsCount] = useState<number>(0);
-  const [rankingQueryParams, setRankingQueryParams] = useState<GetRankingsQueryParams>({
-    sortBy: RankingsSortBy.POPULARITY,
-    page: 1,
-  });
-  const isLoading = true;
-  const refetch = fetchRankingData;
-  const resetRankingQueryParams = () =>
-    setRankingQueryParams({
+  const { watch, reset, setValue } = useForm<GetRankingsQueryParams>();
+
+  const fetchRankings = async () => {
+    const res = axios.get(Api.fetchRankings.buildPath(), {
+      params: {
+        keyword: watch("keyword"),
+        genreIds: watch("genreIds"),
+        sortBy: watch("sortBy"),
+        page: watch("page"),
+      },
+    });
+    return res;
+  };
+
+  // TODO: uniqueKeyをもっとスマートに生成する
+  const { data, refetch, isLoading } = useQuery(
+    `fetchRankings/${watch("keyword")}/${watch("genreIds")}/${watch("sortBy")}/${watch("page")}`,
+    fetchRankings,
+    {
+      onError: (e) => {
+        console.log(e);
+      },
+    }
+  );
+  const resetQueryParams = useCallback(() => {
+    reset({
       sortBy: RankingsSortBy.POPULARITY,
       page: 1,
     });
-
-  async function fetchRankingData() {
-    const request = await axios
-      .get(Api.fetchRankings.buildPath(), {
-        params: rankingQueryParams,
-      })
-      .then((res) => {
-        setRankings(res.data.rankings);
-        setRankingsCount(res.data.totalDataNums);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return request;
-  }
+  }, [reset]);
 
   useEffect(() => {
-    fetchRankingData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    resetQueryParams();
+  }, [resetQueryParams]);
+
+  console.log("watch(sortBy)", watch("sortBy"));
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
     <RankingsContext.Provider
       value={{
-        rankings,
-        rankingsCount,
+        rankings: data?.data.rankings,
+        rankingsCount: data?.data.totalDataNums,
         isLoading,
         refetch,
-        rankingQueryParams,
-        setRankingQueryParams,
-        resetRankingQueryParams,
+        setQueryParams: setValue,
+        resetQueryParams,
       }}
     >
       {children}
